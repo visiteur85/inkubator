@@ -13,17 +13,17 @@ ul li {
 }
 .header {
   grid-area: h;
-  background-color: green;
+  background-color: Khaki;
 }
 .header img {
   width: 20px;
 }
 .nav{
   grid-area: n;
-  background-color: burlywood ;
+  background-color: LightSkyBlue ;
 }
 
 .content {
   grid-area: c;
-  background-color: cornflowerblue;
+  background-color: Seashell;
 }
