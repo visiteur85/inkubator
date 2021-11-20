@@ -20,18 +20,19 @@ export function Todolist(props: PropsType) {
         </div>
         <ul>
             {props.tasks.map(m => {
-                return(
-                    <li><input type="checkbox" checked={m.isDone}/> <span>{m.title}</span></li>
-                )
-            }
-            )
-            }
+            debugger
+            return (
+
+                <li key={m.id}>
+                    <button onClick={()=>alert("Hey")}>x</button>
+                <input type="checkbox"
+                       checked={m.isDone}/>
+                <span>{m.title}</span>
+            </li>)
+            })}
 
 
 
-            {/*<li><input type="checkbox" checked={props.tasks[0].isDone}/> <span>{props.tasks[0].title}</span></li>*/}
-            {/*<li><input type="checkbox" checked={props.tasks[1].isDone}/> <span>{props.tasks[1].title}</span></li>*/}
-            {/*<li><input type="checkbox" checked={props.tasks[2].isDone}/> <span>{props.tasks[2].title}</span></li>*/}
         </ul>
         <div>
             <button>All</button>
