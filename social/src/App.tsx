@@ -6,11 +6,13 @@ import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
 import {BrowserRouter} from "react-router-dom";
+import {state} from "./redux/state";
 
-type MyPostsPropsType = {
+type statePropsType = {
     post: Array<postMyPostsPropsType>
     dialogs: Array<MyDialogsPropsType>
     messages: Array<MyMessagesPropsType>
+   
 }
 
 type postMyPostsPropsType = {
@@ -30,7 +32,7 @@ type MyMessagesPropsType = {
 }
 
 
-function App(props: MyPostsPropsType) {
+function App(props:statePropsType) {
 
     return (
 

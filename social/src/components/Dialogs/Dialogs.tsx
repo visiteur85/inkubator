@@ -5,8 +5,8 @@ import {stringify} from "querystring";
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {Message} from "./Message/Message";
 
-
-type MyPostsPropsType = {
+// MyPostsPropsType
+type DialogsPropsType = {
 
     dialogs: Array<MyDialogsPropsType>
     messages:Array<MyMessagesPropsType>
@@ -22,7 +22,7 @@ type MyMessagesPropsType = {
 }
 
 
-export const Dialogs = (props:MyPostsPropsType) => {
+export const Dialogs = (props:DialogsPropsType) => {
 
 
     let dialogElements = props.dialogs.map((d) => <DialogItem name={d.name} id={d.id}/>);
