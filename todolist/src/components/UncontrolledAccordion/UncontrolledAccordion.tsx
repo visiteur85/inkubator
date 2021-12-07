@@ -14,21 +14,18 @@ let [collapsed, setCollapsed] = useState(false );
 
 
     return <div>
-        <AccordionTitle title={props.titleValue} onClick={() =>{setCollapsed(!collapsed)}}/>
-
+        <AccordionTitle title={props.titleValue}/>
+        <button onClick={() =>{setCollapsed(!collapsed)}}>Toggle</button>
         <AccordionBody tolik={collapsed}/>
 
 
     </div>
 }
 
-type AccordionTitlePropsType = {
-    title: string
-    onClick: () => void
-}
 
-export function AccordionTitle(props: AccordionTitlePropsType) {
-    return <h3 onClick={()=> {props.onClick()}}>{props.title}</h3>
+
+export function AccordionTitle(props: any) {
+    return <h3>{props.title}</h3>
 }
 
 type AccordionBodyType = {
