@@ -3,15 +3,16 @@ import React from 'react';
 import {MyPosts} from "./MyPosts/MyPosts";
 
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {postPropsType} from "../../redux/state";
 type MyPostsPropsType = {
-    post: Array<postMyPostsPropsType>
+    post: Array<postPropsType>
 }
 
-type postMyPostsPropsType = {
-    id: number
-    message: string
-    likesCount: number
-}
+// type postMyPostsPropsType = {
+//     id: number
+//     message: string
+//     likesCount: number
+// }
 export const Profile = (props: MyPostsPropsType) => {
 
 

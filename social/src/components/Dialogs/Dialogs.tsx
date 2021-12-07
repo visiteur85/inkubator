@@ -4,22 +4,15 @@ import {NavLink} from "react-router-dom";
 import {stringify} from "querystring";
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {Message} from "./Message/Message";
+import {dialogsPropsType, MyMessagesPropsType} from "../../redux/state";
 
 // MyPostsPropsType
 type DialogsPropsType = {
 
-    dialogs: Array<MyDialogsPropsType>
+    dialogs: Array<dialogsPropsType>
     messages:Array<MyMessagesPropsType>
 }
-type MyDialogsPropsType = {
-    id: number
-    name: string
-}
 
-type MyMessagesPropsType = {
-    id: number
-    message: string
-}
 
 
 export const Dialogs = (props:DialogsPropsType) => {

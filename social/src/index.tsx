@@ -37,8 +37,8 @@ import {state} from "./redux/state";
 
 ReactDOM.render(
     <BrowserRouter>
-          {/*<App state={state}/>*/}
-        <App post={state.post} dialogs={state.dialogs} messages={state.messages}/>
+          <App state={state}/>
+        {/*<App post={state.post} dialogs={state.dialogs} messages={state.messages}/>*/}
 
     </BrowserRouter>,
     document.getElementById('root')

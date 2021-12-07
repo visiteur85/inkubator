@@ -1,4 +1,18 @@
 
+export type postPropsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+export type dialogsPropsType = {
+    id: number
+    name: string
+}
+export type MyMessagesPropsType = {
+    id: number
+    message: string
+}
+
 export const state = {
     post: [
     {id: 1, message: "Hi, how are you", likesCount: 12},
