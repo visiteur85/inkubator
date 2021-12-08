@@ -7,7 +7,7 @@ import {UncontrolledAccordion} from "./components/UncontrolledAccordion/Uncontro
 import {UncontrolledRating} from "./components/UncontrolledRating/UncontrolledRating";
 import {UncontrolledOnOff} from "./components/UncontrolledOnOff/UncontrolledOnOff";
 import {UncontrolledInput} from "./components/UncontrolledInput";
-import {Input} from "./components/Input";
+import {ControlledCheckBox, ControlledSelect, Input} from "./components/Input";
 
 
 function App(props: any) {
@@ -17,15 +17,18 @@ function App(props: any) {
     let [switchOn, setSwitchOn] = useState<boolean>(false)
     return (
         <div className={"App"}>
-<UncontrolledInput/>
+            {/*<UncontrolledInput/>*/}
             <Input/>
-
+            <ControlledSelect/>
+<ControlledCheckBox/>
             {/*<UncontrolledAccordion titleValue={"Menu"} />*/}
             <UncontrolledRating/>
             <Rating value={ratingValue} onClick={setRatingValue}/>
             <Accordion titleValue={"Menu"}
                        collapsed={accordionCollapsed}
-                       onChange={() => {setAccordionCollapsed(!accordionCollapsed)}}/>
+                       onChange={() => {
+                           setAccordionCollapsed(!accordionCollapsed)
+                       }}/>
             {/*<OnOff  on={switchOn} onChange={(on)=>{setSwitchOn(on)}}/>*/}
             <UncontrolledOnOff onChange={setSwitchOn}/> {switchOn.toString()}
             {/*<OnOff />*/}
