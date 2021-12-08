@@ -6,6 +6,8 @@ import {OnOff} from "./components/OnOff/OnOff";
 import {UncontrolledAccordion} from "./components/UncontrolledAccordion/UncontrolledAccordion";
 import {UncontrolledRating} from "./components/UncontrolledRating/UncontrolledRating";
 import {UncontrolledOnOff} from "./components/UncontrolledOnOff/UncontrolledOnOff";
+import {UncontrolledInput} from "./components/UncontrolledInput";
+import {Input} from "./components/Input";
 
 
 function App(props: any) {
@@ -15,7 +17,8 @@ function App(props: any) {
     let [switchOn, setSwitchOn] = useState<boolean>(false)
     return (
         <div className={"App"}>
-
+<UncontrolledInput/>
+            <Input/>
 
             {/*<UncontrolledAccordion titleValue={"Menu"} />*/}
             <UncontrolledRating/>
