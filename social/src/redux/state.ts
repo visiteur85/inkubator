@@ -13,8 +13,18 @@ export type MyMessagesPropsType = {
     message: string
 }
 
-export const state = {
-    post: [
+export type addPostPropsType = {
+    addPost: (postMessage:string)=>void
+}
+export type profilePage = {
+    post: postPropsType
+    dialogs: dialogsPropsType
+    messages: MyMessagesPropsType
+}
+
+export const state =
+     { profilePage:
+    { post: [
     {id: 1, message: "Hi, how are you", likesCount: 12},
     {id: 2, message: "It is  my first post", likesCount: 11},
     {id: 3, message: "Da da da", likesCount: 13},
@@ -37,5 +47,14 @@ export const state = {
     {id: 4, message: "Yo"},
     {id: 5, message: "Yo"},
     {id: 6, message: "Yo"},
-]
+]}}
+
+
+export const addPost = (postText:string) => {
+const newPost: postPropsType = {
+    id: new Date().getTime(),
+    message: postText,
+    likesCount: 0
+}
+state.profilePage.post.push(newPost)
 }

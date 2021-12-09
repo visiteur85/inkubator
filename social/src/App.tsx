@@ -7,15 +7,17 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
 import {BrowserRouter} from "react-router-dom";
 import {dialogsPropsType, MyMessagesPropsType, postPropsType, state} from "./redux/state";
+import{addPost} from "./redux/state";
 
 
 type statePropsType = {
-   state: {
-       post: Array<postPropsType>
+
+          post: Array<postPropsType>
        dialogs: Array<dialogsPropsType>
        messages: Array<MyMessagesPropsType>
+    addPostCallBack: (postText:string)=>void
    }
-}
+
 
 
 function App(props:statePropsType) {
@@ -27,9 +29,9 @@ function App(props:statePropsType) {
             <Navbar/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route path="/dialogs" element={<Dialogs dialogs={props.state.dialogs}
-                                                             messages={props.state.messages}/>}/>
-                    <Route path="/profile" element={<Profile post={props.state.post}/>}/>
+                    <Route path="/dialogs" element={<Dialogs dialogs={props.dialogs}
+                                                             messages={props.messages}/>}/>
+                    <Route path="/profile" element={<Profile post={props.post} addPostCallBack={props.addPostCallBack}/>}/>
                 </Routes>
             </div>
         </div>
