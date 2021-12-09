@@ -4,18 +4,18 @@ import {NavLink} from "react-router-dom";
 import {stringify} from "querystring";
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {Message} from "./Message/Message";
-import {dialogsPropsType, MyMessagesPropsType} from "../../redux/state";
+import {DialogType, MessageType} from "../../redux/state";
 
 // MyPostsPropsType
-type DialogsPropsType = {
+type DialogPageType = {
 
-    dialogs: Array<dialogsPropsType>
-    messages:Array<MyMessagesPropsType>
+    dialogs: Array<DialogType>
+    messages:Array<MessageType>
 }
 
 
 
-export const Dialogs = (props:DialogsPropsType) => {
+export const Dialogs = (props:DialogPageType) => {
 
 
     let dialogElements = props.dialogs.map((d) => <DialogItem name={d.name} id={d.id}/>);

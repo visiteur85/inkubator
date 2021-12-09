@@ -1,17 +1,19 @@
 import React from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
+import {addPost, PostType} from "../../../redux/state";
+import {addPostPropsType} from "../../../redux/state";
 
 type MyPostsPropsType = {
-    post: Array<postMyPostsPropsType>
+    post: Array<PostType>
     addPostCallBack: (postText:string)=>void
 }
 
-type postMyPostsPropsType = {
-    id: number
-    message: string
-    likesCount: number
-}
+// type postMyPostsPropsType = {
+//     id: number
+//     message: string
+//     likesCount: number
+// }
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
@@ -20,11 +22,13 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    const addNewPost = () => {
-        let text = newPostElement.current ? newPostElement.current.value : "---";
-        // let text = newPostElement.current?.value;
-        props.addPostCallBack(text)
 
+
+const addNewPost = () => {
+if (newPostElement.current) {
+    props.addPostCallBack(newPostElement.current ? newPostElement.current.value: "...")
+newPostElement.current.value = " "
+}
 
     };
 
