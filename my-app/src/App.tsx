@@ -12,6 +12,11 @@ import {ControlledCheckBox, ControlledSelect, Input} from "./components/Input";
 
 function App(props: any) {
 
+    const showValue = (value: number) =>{
+        alert(value)
+    }
+
+
     let [ratingValue, setRatingValue] = useState<RatingValueType>(0)
     let [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(false)
     let [switchOn, setSwitchOn] = useState<boolean>(false)
@@ -20,15 +25,18 @@ function App(props: any) {
             {/*<UncontrolledInput/>*/}
             <Input/>
             <ControlledSelect/>
-<ControlledCheckBox/>
+            <ControlledCheckBox/>
             {/*<UncontrolledAccordion titleValue={"Menu"} />*/}
-            <UncontrolledRating/>
+            {/*<UncontrolledRating/>*/}
             <Rating value={ratingValue} onClick={setRatingValue}/>
             <Accordion titleValue={"Menu"}
                        collapsed={accordionCollapsed}
-                       onChange={() => {
-                           setAccordionCollapsed(!accordionCollapsed)
-                       }}/>
+                       onChange={() => {setAccordionCollapsed(!accordionCollapsed)
+                       }}
+                       items={[{title: "Pavel", value: 1}, {title: "valera", value: 2},
+                           {title:"artem", value: 3}, {title:"Viktor", value:4}]}
+                       showValue={showValue}
+            />
             {/*<OnOff  on={switchOn} onChange={(on)=>{setSwitchOn(on)}}/>*/}
             <UncontrolledOnOff onChange={setSwitchOn}/> {switchOn.toString()}
             {/*<OnOff />*/}
