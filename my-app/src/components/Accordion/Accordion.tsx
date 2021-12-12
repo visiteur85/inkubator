@@ -26,7 +26,7 @@ export function Accordion(props: AccordionPropsType) {
 type AccordionTitlePropsType = {
     title: string
     onChange:() =>void
-    
+
 }
 
 

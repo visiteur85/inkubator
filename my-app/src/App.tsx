@@ -7,38 +7,45 @@ import {UncontrolledAccordion} from "./components/UncontrolledAccordion/Uncontro
 import {UncontrolledRating} from "./components/UncontrolledRating/UncontrolledRating";
 import {UncontrolledOnOff} from "./components/UncontrolledOnOff/UncontrolledOnOff";
 import {UncontrolledInput} from "./components/UncontrolledInput";
-import {ControlledCheckBox, ControlledSelect, Input} from "./components/Input";
+import {ControlledCheckBox, Input} from "./components/Input";
+import { Select} from "./components/Select";
 
 
 function App(props: any) {
 
-    const showValue = (value: number) =>{
-        alert(value)
-    }
+    const items = [
+        {value: "1", title: "Minsk"},
+        {value: "2", title: "Kiev"},
+        {value: "3", title: "Varshsava"}
+    ]
 
-
-    let [ratingValue, setRatingValue] = useState<RatingValueType>(0)
-    let [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(false)
-    let [switchOn, setSwitchOn] = useState<boolean>(false)
+    // const showValue = (value: number) =>{
+    //     alert(value)
+    // }
+    //
+    // let [ratingValue, setRatingValue] = useState<RatingValueType>(0)
+    // let [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(false)
+    // let [switchOn, setSwitchOn] = useState<boolean>(false)
     return (
         <div className={"App"}>
+            <Select items={items}/>
             {/*<UncontrolledInput/>*/}
-            <Input/>
-            <ControlledSelect/>
-            <ControlledCheckBox/>
+            {/*<Input/>*/}
+            {/*<ControlledSelect/>*/}
+            {/*<ControlledCheckBox/>*/}
             {/*<UncontrolledAccordion titleValue={"Menu"} />*/}
             {/*<UncontrolledRating/>*/}
-            <Rating value={ratingValue} onClick={setRatingValue}/>
-            <Accordion titleValue={"Menu"}
-                       collapsed={accordionCollapsed}
-                       onChange={() => {setAccordionCollapsed(!accordionCollapsed)
-                       }}
-                       items={[{title: "Pavel", value: 1}, {title: "valera", value: 2},
-                           {title:"artem", value: 3}, {title:"Viktor", value:4}]}
-                       showValue={showValue}
-            />
+            {/*<Rating value={ratingValue} onClick={setRatingValue}/>*/}
+            {/*<Accordion titleValue={"Menu"}*/}
+            {/*           collapsed={accordionCollapsed}*/}
+            {/*           onChange={() => {setAccordionCollapsed(!accordionCollapsed)*/}
+            {/*           }}*/}
+            {/*           items={[{title: "Pavel", value: 1}, {title: "valera", value: 2},*/}
+            {/*               {title:"artem", value: 3}, {title:"Viktor", value:4}]}*/}
+            {/*           showValue={showValue}*/}
+            {/*/>*/}
             {/*<OnOff  on={switchOn} onChange={(on)=>{setSwitchOn(on)}}/>*/}
-            <UncontrolledOnOff onChange={setSwitchOn}/> {switchOn.toString()}
+            {/*<UncontrolledOnOff onChange={setSwitchOn}/> {switchOn.toString()}*/}
             {/*<OnOff />*/}
             {/*<OnOff />*/}
             {/*<Accordion titleValue={"Menu"} collapsed={true}/>*/}
