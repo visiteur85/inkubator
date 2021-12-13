@@ -38,6 +38,7 @@ export type PostType = {
 }
 export type profilePageType = {
     post: Array<PostType>
+    messageForNewPost: string
 }
 
 export type DialogPageType = {
@@ -53,6 +54,7 @@ export type RootStateType = {
 }
 export const state: RootStateType = {
     profilePage: {
+        messageForNewPost: "",
         post: [
             {id: 1, message: "Hi, how are you", likesCount: 12},
             {id: 2, message: "It is  my first post", likesCount: 11},
@@ -93,7 +95,13 @@ export const addPost = (postText: string) => {
         id: new Date().getTime(),
         message: postText,
         likesCount: 0
-    }
-    state.profilePage.post.push(newPost)
+    };
+    state.profilePage.post.push(newPost);
+    state.profilePage.messageForNewPost=""
     renderTree(state);
-}
+};
+
+export const changeNewText = (newText: string)=> {
+state.profilePage.messageForNewPost = newText;
+    renderTree(state);
+};

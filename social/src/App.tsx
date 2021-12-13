@@ -7,12 +7,14 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
 import {BrowserRouter} from "react-router-dom";
 import {DialogType, MessageType, PostType, RootStateType, state} from "./redux/state";
-import{addPost} from "./redux/state";
+import{addPost, changeNewText} from "./redux/state";
 
 
 type statePropsType = {
         state: RootStateType
     addPostCallBack: (postText:string)=>void
+    changeTextCallback:(newText: string)=>void
+
 }
 
 function App(props:statePropsType) {
@@ -28,6 +30,9 @@ function App(props:statePropsType) {
                                                              messages={props.state.dialogPage.messages}/>}/>
                     <Route path="/profile" element={<Profile post={props.state.profilePage.post}
                                                              addPostCallBack={props.addPostCallBack}
+                                                             message={props.state.profilePage.messageForNewPost
+                                                             }
+                                                             changeTextCallback={props.changeTextCallback}
                     />}/>
                 </Routes>
             </div>
