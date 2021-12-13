@@ -22,6 +22,10 @@
 
 import {renderTree} from "../render";
 
+let onChange = () => {
+console.log("Hello ")
+}
+
 export type MessageType = {
     id: number
     message: string
@@ -98,10 +102,14 @@ export const addPost = (postText: string) => {
     };
     state.profilePage.post.push(newPost);
     state.profilePage.messageForNewPost=""
-    renderTree(state);
+    onChange();
 };
 
 export const changeNewText = (newText: string)=> {
 state.profilePage.messageForNewPost = newText;
-    renderTree(state);
+    onChange();
 };
+
+export const subscribe = (callback:()=>void) => {
+    onChange = callback
+}

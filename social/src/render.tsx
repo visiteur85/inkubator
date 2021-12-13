@@ -1,17 +1,13 @@
 import {addPost, changeNewText, RootStateType} from "./redux/state";
 import ReactDOM from "react-dom";
-import {BrowserRouter} from "react-router-dom";
-import App from "./App";
 import React from "react";
+import App from "./App";
+import {state} from "./redux/state";
 
-export const renderTree = (state: RootStateType) => {
-    ReactDOM.render(
-        <App state={state}
-             addPostCallBack={addPost}
-             changeTextCallback={changeNewText}
-        />
+export const renderTree = () => {
+  ReactDOM.render(<React.StrictMode>
+      <App/>
+  </React.StrictMode>,
+      document.getElementById("root"))
 
-        ,
-        document.getElementById('root')
-    );
 }

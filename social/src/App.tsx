@@ -10,14 +10,14 @@ import {DialogType, MessageType, PostType, RootStateType, state} from "./redux/s
 import{addPost, changeNewText} from "./redux/state";
 
 
-type statePropsType = {
-        state: RootStateType
-    addPostCallBack: (postText:string)=>void
-    changeTextCallback:(newText: string)=>void
+// type statePropsType = {
+//         // state: RootStateType
+//     addPostCallBack: (postText:string)=>void
+//     changeTextCallback:(newText: string)=>void
+//
+// }
 
-}
-
-function App(props:statePropsType) {
+function App() {
 
     return (
         <BrowserRouter>
@@ -26,13 +26,13 @@ function App(props:statePropsType) {
             <Navbar/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route path="/dialogs" element={<Dialogs dialogs={props.state.dialogPage.dialogs}
-                                                             messages={props.state.dialogPage.messages}/>}/>
-                    <Route path="/profile" element={<Profile post={props.state.profilePage.post}
-                                                             addPostCallBack={props.addPostCallBack}
-                                                             message={props.state.profilePage.messageForNewPost
+                    <Route path="/dialogs" element={<Dialogs dialogs={state.dialogPage.dialogs}
+                                                             messages={state.dialogPage.messages}/>}/>
+                    <Route path="/profile" element={<Profile post={state.profilePage.post}
+                                                             addPostCallBack={addPost}
+                                                             message={state.profilePage.messageForNewPost
                                                              }
-                                                             changeTextCallback={props.changeTextCallback}
+                                                             changeTextCallback={changeNewText}
                     />}/>
                 </Routes>
             </div>
