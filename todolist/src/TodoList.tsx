@@ -90,6 +90,7 @@ export function Todolist(props: PropsType) {
             <button className={props.filter === 'completed' ? "active-filter" : ""}
                     onClick={onCompletedClickHandler}>Completed
             </button>
+            <div></div>
         </div>
     </div>
 }
