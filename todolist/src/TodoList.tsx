@@ -2,6 +2,8 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType, TaskType} from "./App";
 import AddItemForm from "./AddItemForm";
 import EditableSpan from "./EditableSpan";
+import {Button, ButtonGroup, Checkbox, IconButton} from "@material-ui/core";
+import {Delete} from "@material-ui/icons";
 
 type PropsType = {
     id: string
@@ -36,20 +38,30 @@ function TodoList(props: PropsType) {
         const removeTask = () => props.removeTask(task.id, props.id)
         return (
             <li key={task.id} className={getClasses()}>
-                <input
-                    type="checkbox"
-                    checked={task.isDone}
-                    onChange={changeStatus}
-                />
+
+                <Checkbox checked={task.isDone}
+                          onChange={changeStatus}
+                          size={"medium"}
+                            color={"primary"}/>
+
+
+
                 <EditableSpan title={task.title} changeTitle={changeTaskTitle}/>
-                <button onClick={removeTask}>x</button>
+                <IconButton onClick={removeTask}>
+                    <Delete/>
+                </IconButton>
+                {/*<button onClick={removeTask}>x</button>*/}
             </li>
         )
     })
 
     const addTask = (title: string) => props.addTask(title, props.id)
     return(
-        <div>
+        <div style={{display:"flex",
+            flexDirection:"column",
+            justifyContent:"space-between",
+            minHeight:"300px"
+        }}>
             <h3>
                 <EditableSpan title={props.title} changeTitle={changeTodoListTitle} />
                 <button onClick={()=>props.removeTodoList(props.id)}>x</button>
@@ -59,15 +71,18 @@ function TodoList(props: PropsType) {
                 {tasksJSX}
             </ul>
             <div>
-                <button
+                <ButtonGroup size={"small"} variant={"contained"} color={"primary"} disableElevation>
+                    {/* eslint-disable-next-line react/jsx-no-undef */}
+                <Button
                     className={getBtnClass("all")}
-                    onClick={setAllFilterValue}>All</button>
-                <button
+                    onClick={setAllFilterValue}>All</Button>
+                <Button
                     className={getBtnClass("active")}
-                    onClick={setActiveFilterValue}>Active</button>
-                <button
+                    onClick={setActiveFilterValue}>Active</Button>
+                <Button
                     className={getBtnClass("completed")}
-                    onClick={setCompletedFilterValue}>Completed</button>
+                    onClick={setCompletedFilterValue}>Completed</Button>
+            </ButtonGroup>
             </div>
         </div>
     )
