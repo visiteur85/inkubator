@@ -33,7 +33,7 @@ function App(props: any) {
             {/*<Input/>*/}
             {/*<ControlledSelect/>*/}
             {/*<ControlledCheckBox/>*/}
-            {/*<UncontrolledAccordion titleValue={"Menu"} />*/}
+            <UncontrolledAccordion titleValue={"Menu"} />
             {/*<UncontrolledRating/>*/}
             {/*<Rating value={ratingValue} onClick={setRatingValue}/>*/}
             {/*<Accordion titleValue={"Menu"}*/}

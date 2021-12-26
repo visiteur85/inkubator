@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import './App.css';
-import TodoList from "./TodoList";
+import {TodoList} from "./TodoList";
 import {v1} from "uuid";
 import AddItemForm from "./AddItemForm";
+import {AppBar, Button, IconButton, Menu, Toolbar, Typography} from "@material-ui/core";
 
 // Create
 // Read
@@ -127,6 +128,20 @@ function App() {
     })
     return (
         <div className="App">
+            <AppBar position="static">
+                <Toolbar style={{justifyContent: "space-between"}}>
+                    {/* eslint-disable-next-line react/jsx-no-undef */}
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+
+                        <Menu open/>
+                    </IconButton>
+                    <Typography variant="h6">
+                        Todolists
+                    </Typography>
+                    <Button color="inherit" variant={"outlined"}>Login</Button>
+                </Toolbar>
+            </AppBar>
+
             {/*<button onClick={addTodo}>Add</button>*/}
             <AddItemForm addItem={addTodoList} />
             { todoListComponents }
