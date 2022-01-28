@@ -9,6 +9,7 @@ import {UncontrolledOnOff} from "./components/UncontrolledOnOff/UncontrolledOnOf
 import {UncontrolledInput} from "./components/UncontrolledInput";
 import {ControlledCheckBox, Input} from "./components/Input";
 import { Select} from "./components/Select";
+import {ReactMemo} from "./components/ReactMemo";
 
 
 function App(props: any) {
@@ -29,6 +30,7 @@ function App(props: any) {
     return (
         <div className={"App"}>
             <Select items={items}/>
+            <ReactMemo/>
             {/*<UncontrolledInput/>*/}
             {/*<Input/>*/}
             {/*<ControlledSelect/>*/}
