@@ -6,8 +6,8 @@ import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
 import {BrowserRouter} from "react-router-dom";
-import {DialogType, MessageType, PostType, RootStateType, state} from "./redux/state";
-import{addPost, changeNewText} from "./redux/state";
+import {DialogType, MessageType, PostType, RootStateType, StoreType} from "./redux/state";
+
 
 
 // type statePropsType = {
@@ -16,8 +16,11 @@ import{addPost, changeNewText} from "./redux/state";
 //     changeTextCallback:(newText: string)=>void
 //
 // }
-
-function App() {
+type PropsType = {
+    store: StoreType
+}
+const App: React.FC<PropsType>=(props)=> {
+    const state = props.store.getState()
 
     return (
         <BrowserRouter>
@@ -29,10 +32,10 @@ function App() {
                     <Route path="/dialogs" element={<Dialogs dialogs={state.dialogPage.dialogs}
                                                              messages={state.dialogPage.messages}/>}/>
                     <Route path="/profile" element={<Profile post={state.profilePage.post}
-                                                             addPostCallBack={addPost}
+                                                             addPostCallBack={props.store.addPost.bind(props.store)}
                                                              message={state.profilePage.messageForNewPost
                                                              }
-                                                             changeTextCallback={changeNewText}
+                                                             changeTextCallback={props.store.changeNewText.bind(props.store)}
                     />}/>
                 </Routes>
             </div>

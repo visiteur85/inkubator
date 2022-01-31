@@ -1,12 +1,12 @@
-import {addPost, changeNewText, RootStateType} from "./redux/state";
+import { RootStateType} from "./redux/state";
 import ReactDOM from "react-dom";
 import React from "react";
 import App from "./App";
-import {state} from "./redux/state";
+import {store} from "./redux/state";
 
 export const renderTree = () => {
   ReactDOM.render(<React.StrictMode>
-      <App/>
+      <App store={store}/>
   </React.StrictMode>,
       document.getElementById("root"))
 

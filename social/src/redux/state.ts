@@ -22,9 +22,7 @@
 
 import {renderTree} from "../render";
 
-let onChange = () => {
-console.log("Hello ")
-}
+
 
 export type MessageType = {
     id: number
@@ -56,7 +54,40 @@ export type RootStateType = {
     sidebar: Sidebar
 
 }
-export const state: RootStateType = {
+
+
+
+export type addPostPropsType = {
+    addPost: (postText: string) => void
+}
+
+// export const addPost = (postText: string) => {
+//     const newPost: PostType = {
+//         id: new Date().getTime(),
+//         message: postText,
+//         likesCount: 0
+//     };
+//     state.profilePage.post.push(newPost);
+//     state.profilePage.messageForNewPost = ""
+//     onChange();
+// };
+
+// export const changeNewText = (newText: string) => {
+//     state.profilePage.messageForNewPost = newText;
+//     onChange();
+// };
+
+
+export type StoreType = {
+    _state: RootStateType
+    changeNewText:(newText: string)=>void
+    addPost:(postText: string)=> void
+    _onChange:()=>void
+    subscribe:(callback:()=>void)=>void
+    getState:()=> RootStateType
+}
+ export const store: StoreType = {
+     _state:  {
     profilePage: {
         messageForNewPost: "",
         post: [
@@ -87,29 +118,28 @@ export const state: RootStateType = {
             ]
     },
     sidebar: {}
-}
-
-
-export type addPostPropsType = {
-    addPost: (postText: string) => void
-}
-
-export const addPost = (postText: string) => {
-    const newPost: PostType = {
-        id: new Date().getTime(),
-        message: postText,
-        likesCount: 0
-    };
-    state.profilePage.post.push(newPost);
-    state.profilePage.messageForNewPost=""
-    onChange();
-};
-
-export const changeNewText = (newText: string)=> {
-state.profilePage.messageForNewPost = newText;
-    onChange();
-};
-
-export const subscribe = (callback:()=>void) => {
-    onChange = callback
+},
+     changeNewText(newText: string){
+         this._state.profilePage.messageForNewPost = newText;
+         this._onChange();
+     },
+     addPost(postText: string){
+         const newPost: PostType = {
+             id: new Date().getTime(),
+             message: postText,
+             likesCount: 0
+         };
+         this._state.profilePage.post.push(newPost);
+         this._state.profilePage.messageForNewPost = ""
+         this._onChange();
+     },
+     _onChange(){
+         console.log("state changed ")
+     },
+     subscribe (callback){
+         this._onChange = callback
+     },
+     getState() {
+         return this._state;
+     }
 }
