@@ -11,6 +11,9 @@ import {ControlledCheckBox, Input} from "./components/Input";
 import { Select} from "./components/Select";
 import {ReactMemo} from "./components/ReactMemo";
 
+import {UseMemo} from "./components/UseMemo";
+import UseMemoTwo from "./components/UseMemoTwo";
+
 
 function App(props: any) {
 
@@ -30,7 +33,9 @@ function App(props: any) {
     return (
         <div className={"App"}>
             <Select items={items}/>
-            <ReactMemo/>
+            {/*<UseMemo/>*/}
+            <UseMemoTwo/>
+            {/*<ReactMemo/>*/}
             {/*<UncontrolledInput/>*/}
             {/*<Input/>*/}
             {/*<ControlledSelect/>*/}
