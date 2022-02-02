@@ -3,15 +3,14 @@ import React from 'react';
 import {MyPosts} from "./MyPosts/MyPosts";
 
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import { PostType} from "../../redux/state";
+import {ActionsTypes, AddPostActionType, ChangeNewTextActionType, PostType} from "../../redux/state";
 // import{addPost} from "../../redux/state";
 
 
 type MyPostsPropsType = {
     post: Array<PostType>
-    addPostCallBack: (postText:string)=>void
-    message: string
-    changeTextCallback:(newText: string)=>void
+       message: string
+        dispatch: (action: ActionsTypes)=>void
 }
 
 // type postMyPostsPropsType = {
@@ -25,9 +24,8 @@ export const Profile = (props: MyPostsPropsType) => {
     return <div>
         <ProfileInfo/>
         <MyPosts post={props.post}
-                 addPostCallBack={props.addPostCallBack}
-                 message={props.message}
-                 changeTextCallback={props.changeTextCallback}
+                                message={props.message}
+                                 dispatch={props.dispatch}
         />
     </div>
 
