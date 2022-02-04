@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {ActionsTypes, PostType} from "../../../redux/state";
+import {ActionsTypes, addPostAC, PostType} from "../../../redux/state";
 import {type} from "os";
 
 
@@ -19,7 +19,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     const addNewPost = () => {
 
-        props.dispatch({type: "ADD-POST", postText: props.message});
+        props.dispatch(addPostAC(props.message));
 
 
     }

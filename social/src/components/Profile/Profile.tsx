@@ -13,11 +13,7 @@ type MyPostsPropsType = {
         dispatch: (action: ActionsTypes)=>void
 }
 
-// type postMyPostsPropsType = {
-//     id: number
-//     message: string
-//     likesCount: number
-// }
+
 export const Profile = (props: MyPostsPropsType) => {
 
 
