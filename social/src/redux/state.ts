@@ -45,6 +45,7 @@ export type profilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+    newMessageBody: string
 }
 export type Sidebar = {}
 export type RootStateType = {
@@ -67,17 +68,7 @@ export type StoreType = {
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
 }
-export type ActionsTypes = AddPostActionType | ChangeNewTextActionType
 
-export type AddPostActionType = {
-    type: "ADD-POST"
-    postText: string
-}
-
-export type ChangeNewTextActionType = {
-    type: "CHANGE-NEW-TEXT"
-    newText: string
-}
 
 export const store: StoreType = {
     _state: {
@@ -108,7 +99,8 @@ export const store: StoreType = {
                     {id: 4, message: "Yo"},
                     {id: 5, message: "Yo"},
                     {id: 6, message: "Yo"},
-                ]
+                ],
+            newMessageBody: ""
         },
         sidebar: {}
     },
@@ -136,7 +128,16 @@ export const store: StoreType = {
             this._state.profilePage.messageForNewPost = action.newText;
             this._onChange();
         }
-
+        else if (action.type === "UPDATE_NEW_MESSAGE_BODY") {
+            this._state.dialogPage.newMessageBody = action.body;
+            this._onChange();
+        }
+        else if (action.type === "SEND_MESSAGE") {
+            let body = this._state.dialogPage.newMessageBody;
+            this._state.dialogPage.newMessageBody = "";
+           this._state.dialogPage.messages.push({id: 7, message: body})
+            this._onChange();
+        }
     }
 }
 
@@ -145,11 +146,47 @@ export const addPostAC = (postText: string): AddPostActionType=> {
         type: "ADD-POST",
         postText: postText
     }
-}
+};
 
 export const ChangeNewTextAC = (newText:string): ChangeNewTextActionType=> {
     return {
         type: "CHANGE-NEW-TEXT",
         newText
     }
+};
+
+export const UpdateNewMessageBodyAC = (body: string): UpdateNewMessageBodyActionType=> {
+    return {
+        type: "UPDATE_NEW_MESSAGE_BODY",
+        body
+    }
+}
+export const SendMessageAC = (): SendMessageActionType=> {
+    return {
+        type: "SEND_MESSAGE"
+
+    }
+}
+
+
+export type ActionsTypes = AddPostActionType | ChangeNewTextActionType | UpdateNewMessageBodyActionType | SendMessageActionType
+
+export type AddPostActionType = {
+    type: "ADD-POST"
+    postText: string
+}
+
+export type ChangeNewTextActionType = {
+    type: "CHANGE-NEW-TEXT"
+    newText: string
+}
+
+export type UpdateNewMessageBodyActionType = {
+    type: "UPDATE_NEW_MESSAGE_BODY"
+    body: string
+}
+
+export type SendMessageActionType = {
+    type: "SEND_MESSAGE"
+
 }

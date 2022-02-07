@@ -6,7 +6,7 @@ import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
 import {BrowserRouter} from "react-router-dom";
-import {DialogType, MessageType, PostType, RootStateType, StoreType} from "./redux/state";
+import {DialogType, MessageType, PostType, RootStateType, store, StoreType} from "./redux/state";
 
 
 
@@ -14,7 +14,7 @@ import {DialogType, MessageType, PostType, RootStateType, StoreType} from "./red
 type PropsType = {
     store: StoreType
 }
-const App: React.FC<PropsType>=(props)=> {
+const App: React.FC<PropsType>=(props:PropsType)=> {
     const state = props.store.getState()
 
     return (
@@ -24,8 +24,13 @@ const App: React.FC<PropsType>=(props)=> {
             <Navbar/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route path="/dialogs" element={<Dialogs dialogs={state.dialogPage.dialogs}
-                                                             messages={state.dialogPage.messages}/>}/>
+                    <Route path="/dialogs" element={<Dialogs
+
+                        dialogs={state.dialogPage.dialogs}
+                                                             messages={state.dialogPage.messages}
+                                                             newMessageBody={state.dialogPage.newMessageBody}
+                                                             dispatch={props.store.dispatch.bind(props.store)}
+                    />}/>
                     <Route path="/profile" element={<Profile post={state.profilePage.post}
                                                              dispatch={props.store.dispatch.bind(props.store)}
                                                                                                                          message={state.profilePage.messageForNewPost
