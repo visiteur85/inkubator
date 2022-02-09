@@ -21,6 +21,9 @@
 // }
 
 import {renderTree} from "../render";
+import {mainOfTypeOfProfile, profileReducer} from "./profile-reducer";
+import {dialogReducer, mainOfTypeOfDialog, UpdateNewMessageBodyActionType} from "./dialog-reducer";
+import {sidebarReducer} from "./sidebar-reducer";
 
 
 export type MessageType = {
@@ -115,78 +118,15 @@ export const store: StoreType = {
         return this._state;
     },
     dispatch(action) {
-        if (action.type === "ADD-POST") {
-            const newPost: PostType = {
-                id: new Date().getTime(),
-                message: action.postText,
-                likesCount: 0
-            };
-            this._state.profilePage.post.push(newPost);
-            this._state.profilePage.messageForNewPost = ""
-            this._onChange();
-        } else if (action.type === "CHANGE-NEW-TEXT") {
-            this._state.profilePage.messageForNewPost = action.newText;
-            this._onChange();
-        }
-        else if (action.type === "UPDATE_NEW_MESSAGE_BODY") {
-            this._state.dialogPage.newMessageBody = action.body;
-            this._onChange();
-        }
-        else if (action.type === "SEND_MESSAGE") {
-            let body = this._state.dialogPage.newMessageBody;
-            this._state.dialogPage.newMessageBody = "";
-           this._state.dialogPage.messages.push({id: 7, message: body})
-            this._onChange();
-        }
-    }
-}
 
-export const addPostAC = (postText: string): AddPostActionType=> {
-    return {
-        type: "ADD-POST",
-        postText: postText
-    }
-};
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogPage = dialogReducer(this._state.dialogPage, action);
+        // this._state.sidebar = sidebarReducer(this._state.sidebar, action);}}
 
-export const ChangeNewTextAC = (newText:string): ChangeNewTextActionType=> {
-    return {
-        type: "CHANGE-NEW-TEXT",
-        newText
-    }
-};
-
-export const UpdateNewMessageBodyAC = (body: string): UpdateNewMessageBodyActionType=> {
-    return {
-        type: "UPDATE_NEW_MESSAGE_BODY",
-        body
-    }
-}
-export const SendMessageAC = (): SendMessageActionType=> {
-    return {
-        type: "SEND_MESSAGE"
 
     }
 }
 
 
-export type ActionsTypes = AddPostActionType | ChangeNewTextActionType | UpdateNewMessageBodyActionType | SendMessageActionType
 
-export type AddPostActionType = {
-    type: "ADD-POST"
-    postText: string
-}
-
-export type ChangeNewTextActionType = {
-    type: "CHANGE-NEW-TEXT"
-    newText: string
-}
-
-export type UpdateNewMessageBodyActionType = {
-    type: "UPDATE_NEW_MESSAGE_BODY"
-    body: string
-}
-
-export type SendMessageActionType = {
-    type: "SEND_MESSAGE"
-
-}
+export type ActionsTypes = mainOfTypeOfDialog | mainOfTypeOfProfile
