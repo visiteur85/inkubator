@@ -3,7 +3,7 @@ import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {} from "../../../redux/dialog-reducer";
 import {type} from "os";
-import {ActionsTypes, PostType} from "../../../redux/state";
+import {ActionsTypes, PostType} from "../../../redux/store";
 import {addPostAC} from "../../../redux/profile-reducer";
 
 

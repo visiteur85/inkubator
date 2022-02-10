@@ -122,7 +122,7 @@ export const store: StoreType = {
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogPage = dialogReducer(this._state.dialogPage, action);
         // this._state.sidebar = sidebarReducer(this._state.sidebar, action);}}
-
+        this._onChange();
 
     }
 }

@@ -9,7 +9,7 @@ import {
     DialogType,
     MessageType,
     StoreType,
-} from "../../redux/state";
+} from "../../redux/store";
 import {SendMessageAC, UpdateNewMessageBodyAC} from "../../redux/dialog-reducer";
 
 // MyPostsPropsType

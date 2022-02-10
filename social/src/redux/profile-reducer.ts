@@ -1,6 +1,15 @@
-import {ActionsTypes, PostType, profilePageType} from "./state";
+import {ActionsTypes, PostType, profilePageType} from "./store";
+let initialState = {
+    messageForNewPost: "",
+    post: [
+        {id: 1, message: "Hi, how are you", likesCount: 12},
+        {id: 2, message: "It is  my first post", likesCount: 11},
+        {id: 3, message: "Da da da", likesCount: 13},
+        {id: 4, message: "No no", likesCount: 11}
 
-export const profileReducer = (state: profilePageType, action: ActionsTypes) => {
+    ]
+}
+export const profileReducer = (state: profilePageType = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case "ADD-POST": {
             const newPost: PostType = {
@@ -13,11 +22,13 @@ export const profileReducer = (state: profilePageType, action: ActionsTypes) => 
             return state;
         }
         // this._onChange();
-
+// сделать копии возможно!!! как на строке 29!!!!!!!!!!!!!!!!!
         case "CHANGE-NEW-TEXT": {
 
-            state.messageForNewPost = action.newText;
-            return state;
+
+            return {...state,
+                messageForNewPost:action.newText
+            };
         }
         // this._onChange();
 

@@ -6,13 +6,13 @@ import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
 import {BrowserRouter} from "react-router-dom";
-import {DialogType, MessageType, PostType, RootStateType, store, StoreType} from "./redux/state";
+import {AppStoreType,  } from "./redux/redux-store";
 
 
 
 
 type PropsType = {
-    store: StoreType
+    store:  AppStoreType //взяли из редакс строка 13
 }
 const App: React.FC<PropsType>=(props:PropsType)=> {
     const state = props.store.getState()

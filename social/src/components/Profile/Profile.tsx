@@ -4,7 +4,7 @@ import {MyPosts} from "./MyPosts/MyPosts";
 
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {} from "../../redux/profile-reducer";
-import {ActionsTypes, PostType} from "../../redux/state";
+import {ActionsTypes, PostType} from "../../redux/store";
 // import{addPost} from "../../redux/state";
 
 
