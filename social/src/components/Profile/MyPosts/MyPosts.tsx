@@ -11,6 +11,10 @@ type MyPostsPropsType = {
     post: Array<PostType>
     message: string
     dispatch: (action: ActionsTypes) => void
+    updateNewPostText:(text:string)=>void
+    addNewPost:()=>void
+
+
 
 }
 
@@ -20,15 +24,17 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
 
     const addNewPost = () => {
-
-        props.dispatch(addPostAC(props.message));
+props.addNewPost();
+        // props.dispatch(addPostAC(props.message));
 
 
     }
 
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+ let text = e.currentTarget.value;
+ props.updateNewPostText(text)
 
-        props.dispatch({type: "CHANGE-NEW-TEXT", newText: e.currentTarget.value})
+        // props.dispatch({type: "CHANGE-NEW-TEXT", newText: e.currentTarget.value})
     }
 
 

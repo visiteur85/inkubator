@@ -19,6 +19,9 @@ type DialogPageType = {
     messages: Array<MessageType>
     newMessageBody: string
     dispatch: (action: ActionsTypes)=>void
+
+    onNewMessageChange:(body:string)=>void
+    onSendMessageClick:()=>void
 }
 // DialogPageType
 
@@ -33,11 +36,13 @@ export const Dialogs = (props:DialogPageType) => {
     let newMessageBody = props.newMessageBody;
 
     let onSendMessageClick= () => {
-        props.dispatch(SendMessageAC());
+        props.onSendMessageClick()
     };
     let onNewMessageChange = (e:ChangeEvent<HTMLTextAreaElement>)=> {
         let body = e.currentTarget.value;
-        props.dispatch(UpdateNewMessageBodyAC(body));
+        props.onNewMessageChange(body)
+
+        // props.dispatch(UpdateNewMessageBodyAC(body));
 
 
     };
@@ -52,7 +57,10 @@ export const Dialogs = (props:DialogPageType) => {
                 <div>
                     <div><textarea value={newMessageBody}
                                    onChange={onNewMessageChange}
-                                   placeholder={"Enter your message"}></textarea></div>
+                                   placeholder={"Enter your message"}>
+
+                    </textarea>
+                    </div>
                     <div>
                         <button onClick={onSendMessageClick}>Send
                         </button>
