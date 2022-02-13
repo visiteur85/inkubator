@@ -1,4 +1,5 @@
-import {ActionsTypes, PostType, profilePageType} from "./store";
+import {} from "./redux-store";
+import {mainOfTypeOfDialog} from "./dialog-reducer";
 let initialState = {
     messageForNewPost: "",
     post: [
@@ -9,7 +10,17 @@ let initialState = {
 
     ]
 }
-export const profileReducer = (state: profilePageType = initialState, action: ActionsTypes) => {
+export type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}
+export type profilePageType = {
+    post: Array<PostType>
+    messageForNewPost: string
+}
+export type ActionsTypes = mainOfTypeOfDialog | mainOfTypeOfProfile
+export const profileReducer = (state: profilePageType = initialState, action: mainOfTypeOfProfile) => {
     switch (action.type) {
         case "ADD-POST": {
             const newPost: PostType = {

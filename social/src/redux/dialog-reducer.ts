@@ -1,4 +1,5 @@
-import {ActionsTypes, DialogPageType, PostType} from "./store";
+import { } from "./redux-store";
+import {mainOfTypeOfProfile} from "./profile-reducer";
 
 let initialState = {
         dialogs: [
@@ -20,7 +21,26 @@ let initialState = {
             ],
         newMessageBody: ""
     }
-export const dialogReducer = (state: DialogPageType = initialState, action: ActionsTypes)=> {
+export type ActionsTypes = mainOfTypeOfDialog | mainOfTypeOfProfile;
+export type DialogPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    newMessageBody: string
+}
+export type MessageType = {
+    id: number
+    message: string
+}
+export type DialogType = {
+    id: number
+    name: string
+}
+// export type PostType = {
+//     id: number
+//     message: string
+//     likesCount: number
+// }
+export const dialogReducer = (state: DialogPageType = initialState, action: mainOfTypeOfDialog)=> {
     switch (action.type) {
         case "UPDATE_NEW_MESSAGE_BODY": {
             state.newMessageBody = action.body;

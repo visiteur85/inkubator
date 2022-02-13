@@ -3,8 +3,8 @@ import React from 'react';
 import {MyPosts} from "./MyPosts/MyPosts";
 
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {} from "../../redux/profile-reducer";
-import {ActionsTypes, PostType} from "../../redux/store";
+import {ActionsTypes, PostType} from "../../redux/profile-reducer";
+import {} from "../../redux/redux-store";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {AppStoreType} from "../../redux/redux-store";
 // import{addPost} from "../../redux/state";

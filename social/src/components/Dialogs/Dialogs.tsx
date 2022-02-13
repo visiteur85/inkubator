@@ -5,12 +5,9 @@ import {stringify} from "querystring";
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {Message} from "./Message/Message";
 import {
-    ActionsTypes,
-    DialogType,
-    MessageType,
-    StoreType,
-} from "../../redux/store";
-import {SendMessageAC, UpdateNewMessageBodyAC} from "../../redux/dialog-reducer";
+
+} from "../../redux/redux-store";
+import {ActionsTypes, DialogType, MessageType, SendMessageAC, UpdateNewMessageBodyAC} from "../../redux/dialog-reducer";
 
 // MyPostsPropsType
 type DialogPageType = {

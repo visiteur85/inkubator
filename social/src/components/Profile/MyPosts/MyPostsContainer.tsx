@@ -1,8 +1,8 @@
 import React, {ChangeEvent} from 'react';
  import {Post} from "./Post/Post";
 import {} from "../../../redux/dialog-reducer";
-import {ActionsTypes, PostType} from "../../../redux/store";
-import {addPostAC} from "../../../redux/profile-reducer";
+import {} from "../../../redux/redux-store";
+import {ActionsTypes, addPostAC, PostType} from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {AppStoreType} from "../../../redux/redux-store";
 
