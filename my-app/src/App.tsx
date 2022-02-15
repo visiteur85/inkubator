@@ -13,6 +13,7 @@ import {ReactMemo} from "./components/ReactMemo";
 
 import {UseMemo} from "./components/UseMemo";
 import UseMemoTwo from "./components/UseMemoTwo";
+import {HelpsToReactMemo} from "./components/HelpsToReactMemo";
 
 
 function App(props: any) {
@@ -33,14 +34,15 @@ function App(props: any) {
     return (
         <div className={"App"}>
             <Select items={items}/>
+            <HelpsToReactMemo/>
             {/*<UseMemo/>*/}
-            <UseMemoTwo/>
+            {/*<UseMemoTwo/>*/}
             {/*<ReactMemo/>*/}
             {/*<UncontrolledInput/>*/}
             {/*<Input/>*/}
             {/*<ControlledSelect/>*/}
             {/*<ControlledCheckBox/>*/}
-            <UncontrolledAccordion titleValue={"Menu"} />
+            {/*<UncontrolledAccordion titleValue={"Menu"} />*/}
             {/*<UncontrolledRating/>*/}
             {/*<Rating value={ratingValue} onClick={setRatingValue}/>*/}
             {/*<Accordion titleValue={"Menu"}*/}

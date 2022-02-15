@@ -24,7 +24,6 @@ export const UseMemo = () => {
     for (let i= 1; i<=b; i++) {
         resultB= resultB*i
     }
-
     return (
         <div>
             <input value={a} onChange={(e)=>setA(+e.currentTarget.value)}/>
@@ -33,11 +32,9 @@ export const UseMemo = () => {
             <div>
                 Result for a: {resultA}
             </div>
-
             <div>
                 Result for b: {resultB}
             </div>
-
         </div>
     );
 };
