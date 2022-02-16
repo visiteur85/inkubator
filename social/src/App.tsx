@@ -6,18 +6,18 @@ import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
 import {BrowserRouter} from "react-router-dom";
-import {AppStoreType,} from "./redux/redux-store";
+import {AppStoreType, store,} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
-type PropsType = {
-    store: AppStoreType //взяли из редакс строка 13
-}
-const App: React.FC<PropsType> = (props: PropsType) => {
-    const state = props.store.getState()
+// type PropsType = {
+//     store: AppStoreType //взяли из редакс строка 13
+// }
+const App = () => {
+    const state = store.getState()
 
     return (
-        <BrowserRouter>
+        // <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
@@ -25,23 +25,24 @@ const App: React.FC<PropsType> = (props: PropsType) => {
                     <Routes>
                         <Route path="/dialogs" element={<DialogsContainer
 
-                            dialogs={state.dialogPage.dialogs}
-                            messages={state.dialogPage.messages}
-                            newMessageBody={state.dialogPage.newMessageBody}
-                            dispatch={props.store.dispatch.bind(props.store)}
+                            // dialogs={state.dialogPage.dialogs}
+                            // messages={state.dialogPage.messages}
+                            // newMessageBody={state.dialogPage.newMessageBody}
+                            // dispatch={props.store.dispatch.bind(props.store)}
 
                         />}/>
-                        <Route path="/profile" element={<Profile post={state.profilePage.post}
-                                                                 dispatch={props.store.dispatch.bind(props.store)}
-                                                                 store={props.store}
-                                                                 message={state.profilePage.messageForNewPost
-                                                                 }
+                        <Route path="/profile" element={<Profile
+                            // post={state.profilePage.post}
+                            // dispatch={props.store.dispatch.bind(props.store)}
+                            // store={props.store}
+                            // message={state.profilePage.messageForNewPost
+                            // }
 
                         />}/>
                     </Routes>
                 </div>
             </div>
-        </BrowserRouter>
+        // </BrowserRouter>
     );
 }
 

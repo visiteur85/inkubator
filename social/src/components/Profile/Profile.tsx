@@ -10,15 +10,15 @@ import {AppStoreType} from "../../redux/redux-store";
 // import{addPost} from "../../redux/state";
 
 
-type MyPostsPropsType = {
-    post: Array<PostType>
-       message: string
-        dispatch: (action: ActionsTypes)=>void
-    store: AppStoreType
-}
+// type MyPostsPropsType = {
+//     post: Array<PostType>
+//        message: string
+//         dispatch: (action: ActionsTypes)=>void
+//     store: AppStoreType
+// }
+//props: MyPostsPropsType
 
-
-export const Profile = (props: MyPostsPropsType) => {
+export const Profile = () => {
 
 
     return <div>
@@ -27,10 +27,12 @@ export const Profile = (props: MyPostsPropsType) => {
         {/*                        message={props.message}*/}
         {/*                         dispatch={props.dispatch}*/}
         {/*/>*/}
-        <MyPostsContainer store={props.store}
-            post={props.post}
-                                message={props.message}
-                                dispatch={props.dispatch}/>
+        <MyPostsContainer
+            // store={props.store}
+            // post={props.post}
+            //                     message={props.message}
+            //                     dispatch={props.dispatch}
+        />
     </div>
 
 }
