@@ -16,6 +16,7 @@ import UseMemoTwo from "./components/UseMemoTwo";
 import {HelpsToReactMemo} from "./components/HelpsToReactMemo";
 import {UseState} from "./components/UseState";
 import {SimpleExample} from "./components/SimpleExample";
+import {SetTimoutExample} from "./components/SetTimoutExample";
 
 
 function App(props: any) {
@@ -35,7 +36,8 @@ function App(props: any) {
     // let [switchOn, setSwitchOn] = useState<boolean>(false)
     return (
         <div className={"App"}>
-            <SimpleExample/>
+            <SetTimoutExample/>
+            {/*<SimpleExample/>*/}
             {/*<UseState/>*/}
             {/*<Select items={items}/>*/}
             {/*<HelpsToReactMemo/>*/}
