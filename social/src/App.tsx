@@ -8,6 +8,8 @@ import {Route, Routes} from "react-router-dom";
 import {BrowserRouter} from "react-router-dom";
 import {AppStoreType, store,} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {Newss} from "./components/News/Newss";
+
 
 
 // type PropsType = {
@@ -39,7 +41,10 @@ const App = () => {
                             // }
 
                         />}/>
+                        {/*<Route path="/news" element={<News />}/>*/}
+
                     </Routes>
+
                 </div>
             </div>
         // </BrowserRouter>
