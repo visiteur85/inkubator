@@ -9,10 +9,10 @@ import {ActionsTypes, addPostAC, PostType} from "../../../redux/profile-reducer"
 
 type MyPostsPropsType = {
     post: Array<PostType>
-    message: string
-    dispatch: (action: ActionsTypes) => void
+    messageForNewPost: string
+
     updateNewPostText:(text:string)=>void
-    addNewPost:()=>void
+    addNewPost:(postText:string)=>void
 
 
 
@@ -20,11 +20,13 @@ type MyPostsPropsType = {
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
+    console.log(props)
+
     let postElements = props.post.map(p => <Post message={p.message} likes={p.likesCount}/>)
 
 
     const addNewPost = () => {
-props.addNewPost();
+props.addNewPost(props.messageForNewPost);
         // props.dispatch(addPostAC(props.message));
 
 
@@ -43,7 +45,7 @@ props.addNewPost();
         <div>
             <div>
                 <textarea
-                    value={props.message}
+                    value={props.messageForNewPost}
                     onChange={newTextChangeHandler}
                     onKeyPress={(e) => {
                         if (e.key === "Enter") {

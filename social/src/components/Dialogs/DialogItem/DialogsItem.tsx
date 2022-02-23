@@ -2,12 +2,10 @@ import React from 'react';
 import s from "./../Dialogs.module.css"
 import {NavLink} from "react-router-dom";
 import {stringify} from "querystring";
+import {DialogType} from "../../../redux/dialog-reducer";
 
 
-type DialogItemPropsType = {
-    name: string
-    id: number
-}
+type DialogItemPropsType = DialogType
 
 
 export const DialogItem = (props: DialogItemPropsType) => {

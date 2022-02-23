@@ -3,7 +3,7 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
+
 import {Route, Routes} from "react-router-dom";
 import {BrowserRouter} from "react-router-dom";
 import {AppStoreType, store,} from "./redux/redux-store";
@@ -32,7 +32,7 @@ const App = () => {
                             // newMessageBody={state.dialogPage.newMessageBody}
                             // dispatch={props.store.dispatch.bind(props.store)}
 
-                        />}/>
+                         />}/>
                         <Route path="/profile" element={<Profile
                             // post={state.profilePage.post}
                             // dispatch={props.store.dispatch.bind(props.store)}

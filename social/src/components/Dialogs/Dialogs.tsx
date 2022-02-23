@@ -15,7 +15,7 @@ type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageBody: string
-    dispatch: (action: ActionsTypes)=>void
+    // dispatch: (action: ActionsTypes)=>void
 
     onNewMessageChange:(body:string)=>void
     onSendMessageClick:()=>void
@@ -26,7 +26,7 @@ type DialogPageType = {
 
 export const Dialogs = (props:DialogPageType) => {
 
-
+    console.log(props)
     let dialogElements = props.dialogs.map((d) => <DialogItem name={d.name} id={d.id}/>);
 
     let messagesElements = props.messages.map(m => <Message message={m.message}/>);
