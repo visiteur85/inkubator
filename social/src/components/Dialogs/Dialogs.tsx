@@ -52,7 +52,8 @@ export const Dialogs = (props:DialogPageType) => {
             <div className={s.messages}>
                 <div>{messagesElements}</div>
                 <div>
-                    <div><textarea value={newMessageBody}
+                    <div>
+                        <textarea value={newMessageBody}
                                    onChange={onNewMessageChange}
                                    placeholder={"Enter your message"}>
 

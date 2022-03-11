@@ -28,9 +28,12 @@ export const profileReducer = (state: profilePageType = initialState, action: ma
                 message: action.postText,
                 likesCount: 0
             };
-            state.post.push(newPost);
-            state.messageForNewPost = "";
-            return state;
+            //возможно здесь в строке ниже проблема будет. смотрим 47 видео
+            let stateCopy = {...state};
+            stateCopy.post = [...state.post]
+            stateCopy.post.push(newPost);
+            stateCopy.messageForNewPost = "";
+            return stateCopy;
         }
         // this._onChange();
 // сделать копии возможно!!! как на строке 29!!!!!!!!!!!!!!!!!
