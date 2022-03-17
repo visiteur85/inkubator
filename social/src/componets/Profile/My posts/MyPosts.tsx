@@ -12,8 +12,8 @@ export const MyPosts = () => {
 
             </div>
             <div className={s.posts}>
-                <Post/>
-                <Post/>
+                <Post message={"Hi, how are you"}/>
+                <Post message={"it's my first post"}/>
             </div>
         </div>
 
