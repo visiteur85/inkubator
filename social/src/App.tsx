@@ -5,22 +5,34 @@ import {Navbar} from "./componets/Navbar/Navbar";
 import {Profile} from "./componets/Profile/Profile";
 import {Dialogs} from "./componets/Dialogs/Dialogs";
 import s from "./componets/Dialogs/Dialogs.module.css";
+import { Routes, Route} from "react-router-dom";
 
 
 const App = () => {
 
 
     return (
+
         <div className="app-wrapper">
             <Header/>
             <Navbar/>
             <div className="app-wrapper-content">
-                <Dialogs/>
+                <Routes>
+                    <Route path={"/dialogs"} element={<Dialogs/>}/>
+                    <Route path={"/profile"} element={<Profile/>}/>
+                    {/*<Route path={"/news"} element={<News/>}/>*/}
+                    {/*<Route path={"/music"} element={<Music/>}/>*/}
+                    {/*<Route path={"/settings"} element={<Settings/>}/>*/}
+                </Routes>
+
+
             </div>
-            {/*<Profile/>*/}
+
 
         </div>
+
     );
 }
 
 export default App;
+
