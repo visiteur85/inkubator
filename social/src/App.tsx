@@ -4,7 +4,6 @@ import {Header} from "./componets/Header/Header";
 import {Navbar} from "./componets/Navbar/Navbar";
 import {Profile} from "./componets/Profile/Profile";
 import {Dialogs} from "./componets/Dialogs/Dialogs";
-import s from "./componets/Dialogs/Dialogs.module.css";
 import {Routes, Route} from "react-router-dom";
 
 
