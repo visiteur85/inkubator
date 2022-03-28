@@ -6,28 +6,44 @@ export const Dialogs = () => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
-                <div className={s.dialog}>
-                    <NavLink to="/dialogs/1"> Pavel</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to="/dialogs/2">Dima</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to="/dialogs/3">Andrew</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to="/dialogs/3">Olia</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to="/dialogs/5">Sasha</NavLink>
-                </div>
+
+                <DialogItem name={"Pavel"} id={"1"}/>
+                <DialogItem name={"Dima"} id={"2"}/>
+                <DialogItem name={"Andrew"} id={"3"}/>
+                <DialogItem name={"Olia"} id={"4"}/>
+                <DialogItem name={"Sasha"} id={"5"}/>
+
             </div>
             <div className={s.messages}>
-                <div className={s.message}>Hi</div>
-                <div className={s.message}>How are you</div>
-                <div className={s.message}>Peace</div>
+                <Message message={"Hi"}/>
+                <Message message={"How are you"}/>
+                <Message message={"Peace"}/>
+
             </div>
         </div>
     );
 };
 
+export type DialogItemPropsType = {
+    name:string
+    id:string
+}
+
+export const DialogItem = (props: DialogItemPropsType)=> {
+    return (
+        <div className={s.dialog}>
+            <NavLink to={"/dialogs/" + props.id}>{props.name}</NavLink>
+        </div>
+    )
+}
+
+
+export type MessagePropsType = {
+    message:string
+}
+export const Message = (props:MessagePropsType) => {
+    return (
+        <div className={s.message}>{props.message}</div>
+    )
+
+}
