@@ -21,8 +21,8 @@ export const MyPosts = () => {
 
             </div>
             <div className={s.posts}>
-                <Post message={postData[0].message} likesCount={postData[0].likesCount}/>
-                <Post message={postData[1].message} likesCount={postData[1].likesCount}/>
+                {postData.map((post, index) => <Post key={index} message={post.message} likesCount={post.likesCount}/>)}
+
             </div>
         </div>
 

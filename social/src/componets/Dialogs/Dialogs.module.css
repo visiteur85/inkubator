@@ -5,6 +5,8 @@
 
 .dialogsItem {
     padding: 10px;
+
+
 }
 
 .dialog {
@@ -13,8 +15,15 @@
 
 .messages {
     padding: 10px;
+
 }
 
 .message {
+    color: white;
+}
+
+.Navlink {
+    color: burlywood;
+    text-decoration: none;
 }
 
