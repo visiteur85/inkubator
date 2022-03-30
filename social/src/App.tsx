@@ -9,6 +9,7 @@ import {Routes, Route} from "react-router-dom";
 
 const App = () => {
 
+    let text = "aaa";
 
     return (
 
@@ -19,6 +20,8 @@ const App = () => {
                 <Routes>
                     <Route path={"/dialogs"} element={<Dialogs/>}/>
                     <Route path={"/profile"} element={<Profile/>}/>
+
+
                     {/*<Route path={"/news"} element={<News/>}/>*/}
                     {/*<Route path={"/music"} element={<Music/>}/>*/}
                     {/*<Route path={"/settings"} element={<Settings/>}/>*/}
