@@ -1,13 +1,22 @@
 import React from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
+import {} from "../../../App";
+import {PostsPropsType} from "../../../index";
 
-export const MyPosts = () => {
+type PropsType = {
+    posts:PostsPropsType
+}
 
-    let postData = [
-        {id: 1, message: "Hi, how are you", likesCount: 0},
-        {id: 2, message: "it's my first post", likesCount: 23}
-    ]
+
+export const MyPosts = (props:PropsType) => {
+
+    // let posts = [
+    //     {id: 1, message: "Hi, how are you", likesCount: 0},
+    //     {id: 2, message: "it's my first post", likesCount: 23},
+    //     {id: 2, message: "I m ok", likesCount: 14},
+    //     {id: 2, message: "Great", likesCount: 43},
+    // ]
     return (
         <div className={s.postsBlock}>
             <h3>My Posts</h3>
@@ -21,7 +30,7 @@ export const MyPosts = () => {
 
             </div>
             <div className={s.posts}>
-                {postData.map((post, index) => <Post key={index} message={post.message} likesCount={post.likesCount}/>)}
+                {props.posts.map((post, index) => <Post key={index} message={post.message} likesCount={post.likesCount}/>)}
 
             </div>
         </div>
