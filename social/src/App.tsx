@@ -5,47 +5,16 @@ import {Navbar} from "./componets/Navbar/Navbar";
 import {Profile} from "./componets/Profile/Profile";
 import {Dialogs} from "./componets/Dialogs/Dialogs";
 import {Routes, Route} from "react-router-dom";
-import {DialogsPropsType, MessagesPropsType, PostsPropsType} from "./index";
-import {type} from "os";
+import {RootStateType} from "./Redux/state";
 
-// export type PostsPropsType = {
-//     posts:Array<PostPropsType>
-// };
-// export type PostPropsType = {
-//     id:number
-//     message:string
-//     likesCount:number
-// }
-//
-// export type DialogsPropsType = {
-//     dialogs:Array<DialogPropsType>
-// };
-// export type DialogPropsType = {
-//     id:number
-//     name:string
-//
-// }
-//
-// export type MessagesPropsType = {
-//     messages:Array<MessagePropsType>
-// };
-// export type MessagePropsType = {
-//     id:number
-//     message:string
-//
-// }
-//
-// export type PropsType = PostsPropsType | DialogsPropsType |  MessagesPropsType;
+
 
 type PropsType = {
-    posts:PostsPropsType
-    dialogs:DialogsPropsType
-    messages:MessagesPropsType
+    appState: RootStateType
 
 }
 
-const App = (props:PropsType) => {
-
+const App = (props: PropsType) => {
 
 
     return (
@@ -55,8 +24,9 @@ const App = (props:PropsType) => {
             <Navbar/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route path={"/dialogs"} element={<Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
-                    <Route path={"/profile"} element={<Profile posts={props.posts}/>}/>
+                    <Route path={"/dialogs"} element={<Dialogs dialogs={props.appState.dialogsPage.dialogs}
+                                                               messages={props.appState.dialogsPage.messages}/>}/>
+                    <Route path={"/profile"} element={<Profile posts={props.appState.profilePage}/>}/>
 
 
                     {/*<Route path={"/news"} element={<News/>}/>*/}

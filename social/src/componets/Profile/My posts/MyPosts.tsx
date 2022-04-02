@@ -2,14 +2,15 @@ import React from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {} from "../../../App";
-import {PostsPropsType} from "../../../index";
+import {ProfilePageType} from "../../../Redux/state";
+
 
 type PropsType = {
-    posts:PostsPropsType
+    posts: ProfilePageType
 }
 
 
-export const MyPosts = (props:PropsType) => {
+export const MyPosts = (props: PropsType) => {
 
     // let posts = [
     //     {id: 1, message: "Hi, how are you", likesCount: 0},
@@ -30,7 +31,8 @@ export const MyPosts = (props:PropsType) => {
 
             </div>
             <div className={s.posts}>
-                {props.posts.map((post, index) => <Post key={index} message={post.message} likesCount={post.likesCount}/>)}
+                {props.posts.posts.map((post, index) => <Post key={index} message={post.message}
+                                                              likesCount={post.likesCount}/>)}
 
             </div>
         </div>
