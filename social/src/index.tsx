@@ -4,56 +4,15 @@ import reportWebVitals from './reportWebVitals';
 import ReactDOM from "react-dom";
 import App from "./App";
 import {BrowserRouter} from "react-router-dom";
-import {state} from "./Redux/state";
+import {addPost, state} from "./Redux/state";
 
-// export type PostsPropsType = Array<PostPropsType>;
-// export type PostPropsType = {
-//     id:number
-//     message:string
-//     likesCount:number
-// }
-//
-// export type DialogsPropsType = Array<DialogPropsType>;
-// export type DialogPropsType = {
-//     id:number
-//     name:string
-//
-// };
-//
-// export type MessagesPropsType = Array<MessagePropsType>;
-// export type MessagePropsType = {
-//     id:number
-//     message:string
-//
-// };
-//
-// let posts:PostsPropsType = [
-//     {id: 1, message: "Hi, how are you", likesCount: 0},
-//     {id: 2, message: "it's my first post", likesCount: 23},
-//     {id: 2, message: "I m ok", likesCount: 14},
-//     {id: 2, message: "Great", likesCount: 43},
-// ];
-//
-// let dialogsData:DialogsPropsType = [
-//     {id: 1, name: "Pavel"},
-//     {id: 2, name: "Dima"},
-//     {id: 3, name: "Andrew"},
-//     {id: 4, name: "Olia"},
-//     {id: 5, name: "Sasha"}
-// ];
-//
-// let messagesData:MessagesPropsType = [
-//     {id: 1, message: "HI"},
-//     {id: 2, message: "How are you"},
-//     {id: 3, message: "Peace"},
-//
-// ];
+
 
 
 ReactDOM.render(
     <BrowserRouter>
         <App appState={state}
-
+addPost={addPost}
         />
     </BrowserRouter>
     ,

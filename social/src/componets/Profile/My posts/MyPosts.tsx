@@ -7,6 +7,7 @@ import {ProfilePageType} from "../../../Redux/state";
 
 type PropsType = {
     posts: ProfilePageType
+    addPost:(postMessage: string)=>void
 }
 
 
@@ -14,10 +15,11 @@ export const MyPosts = (props: PropsType) => {
 
 
 
-    let newPostElement: any   = React.createRef();
+    let newPostElement:any   = React.createRef();
     const addPost = () => {
         let text = newPostElement.current.value;
-        alert(text)
+        // alert(text)
+        props.addPost(text)
     }
 
     return (
