@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {LegacyRef} from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {} from "../../../App";
@@ -12,27 +12,30 @@ type PropsType = {
 
 export const MyPosts = (props: PropsType) => {
 
-    // let posts = [
-    //     {id: 1, message: "Hi, how are you", likesCount: 0},
-    //     {id: 2, message: "it's my first post", likesCount: 23},
-    //     {id: 2, message: "I m ok", likesCount: 14},
-    //     {id: 2, message: "Great", likesCount: 43},
-    // ]
+
+
+    let newPostElement: any   = React.createRef();
+    const addPost = () => {
+        let text = newPostElement.current.value;
+        alert(text)
+    }
+
     return (
         <div className={s.postsBlock}>
             <h3>My Posts</h3>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea ref={newPostElement}></textarea>
                 </div>
                 <div>
-                    <button>ADD post</button>
+                    <button onClick={addPost}>ADD post</button>
                 </div>
 
             </div>
             <div className={s.posts}>
-                {props.posts.posts.map((post, index) => <Post key={index} message={post.message}
-                                                              likesCount={post.likesCount}/>)}
+                {props.posts.posts.map((post, index) =>
+                    <Post key={index} message={post.message}
+                          likesCount={post.likesCount}/>)}
 
             </div>
         </div>
