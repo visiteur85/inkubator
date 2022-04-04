@@ -7,20 +7,22 @@ import {ProfilePageType} from "../../../Redux/state";
 
 type PropsType = {
     posts: ProfilePageType
-    addPost:(postMessage: string)=>void
+    addPost: (postMessage: string) => void
 }
 
 
 export const MyPosts = (props: PropsType) => {
 
 
-
-    let newPostElement:any   = React.createRef();
+    let newPostElement = React.createRef<HTMLTextAreaElement>();
     const addPost = () => {
-        let text = newPostElement.current.value;
-        // alert(text)
-        props.addPost(text)
+        if (newPostElement.current) {
+            let text = newPostElement.current.value;
+            props.addPost(text)
+            newPostElement.current.value = ""
+        }
     }
+
 
     return (
         <div className={s.postsBlock}>

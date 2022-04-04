@@ -4,14 +4,13 @@ import {Header} from "./componets/Header/Header";
 import {Navbar} from "./componets/Navbar/Navbar";
 import {Profile} from "./componets/Profile/Profile";
 import {Dialogs} from "./componets/Dialogs/Dialogs";
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, BrowserRouter} from "react-router-dom";
 import {RootStateType} from "./Redux/state";
-
 
 
 type PropsType = {
     appState: RootStateType
-    addPost:(postMessage: string)=>void
+    addPost: (postMessage: string) => void
 
 }
 
@@ -19,7 +18,7 @@ const App = (props: PropsType) => {
 
 
     return (
-
+        // <BrowserRouter>
         <div className="app-wrapper">
             <Header/>
             <Navbar/>
@@ -28,20 +27,18 @@ const App = (props: PropsType) => {
                     <Route path={"/dialogs"} element={<Dialogs dialogs={props.appState.dialogsPage.dialogs}
                                                                messages={props.appState.dialogsPage.messages}/>}/>
                     <Route path={"/profile"} element={<Profile posts={props.appState.profilePage}
-                    addPost={props.addPost}/>}/>
+                                                               addPost={props.addPost}/>}/>
 
 
                     {/*<Route path={"/news"} element={<News/>}/>*/}
                     {/*<Route path={"/music"} element={<Music/>}/>*/}
                     {/*<Route path={"/settings"} element={<Settings/>}/>*/}
                 </Routes>
-
-
             </div>
 
 
         </div>
-
+        // </BrowserRouter>
     );
 }
 

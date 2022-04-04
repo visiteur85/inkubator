@@ -1,28 +1,26 @@
 import React from 'react';
 import './index.css';
-import reportWebVitals from './reportWebVitals';
+
 import ReactDOM from "react-dom";
-import App from "./App";
-import {BrowserRouter} from "react-router-dom";
-import {addPost, state} from "./Redux/state";
 
 
+import {addPost, RootStateType, state} from "./Redux/state";
+import {renderTree} from "./render";
 
 
-ReactDOM.render(
-    <BrowserRouter>
-        <App appState={state}
-addPost={addPost}
-        />
-    </BrowserRouter>
-    ,
-    document.getElementById('root'),
-);
+// export const renderTree = (state:RootStateType) => {
+//     ReactDOM.render(
+//         // <BrowserRouter>
+//             <App appState={state}
+//                  addPost={addPost}/>
+//          // </BrowserRouter>
+//         ,
+//         document.getElementById('root'),
+//     );
+// }
+renderTree(state);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
 
 
 
