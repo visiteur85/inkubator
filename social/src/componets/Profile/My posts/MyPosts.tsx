@@ -7,7 +7,10 @@ import {ProfilePageType} from "../../../Redux/state";
 
 type PropsType = {
     posts: ProfilePageType
-    addPost: (postMessage: string) => void
+    addPost: () => void
+
+
+    updateNewPostText: (newText: string) => void
 }
 
 
@@ -16,10 +19,17 @@ export const MyPosts = (props: PropsType) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     const addPost = () => {
+
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            props.addPost(text)
-            newPostElement.current.value = ""
+            props.addPost()
+        }
+    }
+
+    const onPostChange = () => {
+        if (newPostElement.current) {
+            let text = newPostElement.current.value;
+            props.updateNewPostText(text)
         }
     }
 
@@ -29,7 +39,9 @@ export const MyPosts = (props: PropsType) => {
             <h3>My Posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea ref={newPostElement}
+                              onChange={onPostChange}
+                              value={props.posts.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>ADD post</button>
