@@ -6,16 +6,7 @@ import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 
 
-// export const renderTree = (state:RootStateType) => {
-//     ReactDOM.render(
-//         // <BrowserRouter>
-//             <App appState={state}
-//                  addPost={addPost}/>
-//          // </BrowserRouter>
-//         ,
-//         document.getElementById('root'),
-//     );
-// }
+
 
 
  const renderTree = (state: RootStateType) => {
