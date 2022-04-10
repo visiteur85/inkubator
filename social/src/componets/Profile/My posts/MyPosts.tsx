@@ -2,15 +2,14 @@ import React, {LegacyRef} from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {} from "../../../App";
-import {ProfilePageType} from "../../../Redux/state";
+import {ActionsType, ProfilePageType} from "../../../Redux/state";
 
 
 type PropsType = {
     posts: ProfilePageType
-    addPost: () => void
 
+    dispatch:(action:ActionsType)=>void
 
-    updateNewPostText: (newText: string) => void
 }
 
 
@@ -22,14 +21,15 @@ export const MyPosts = (props: PropsType) => {
 
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            props.addPost()
+            props.dispatch({type:"ADD-POST"})
         }
     }
 
     const onPostChange = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            props.updateNewPostText(text)
+
+            props.dispatch({type: "UPDATE-NEW-POST", newText:text});
         }
     }
 

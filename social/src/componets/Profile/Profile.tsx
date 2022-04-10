@@ -3,14 +3,13 @@ import s from "./profile.module.css"
 import {MyPosts} from "./My posts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {} from "../../App";
-import {ProfilePageType} from "../../Redux/state";
+import {ActionsType, ProfilePageType} from "../../Redux/state";
 
 
 type PropsType = {
     profilePage: ProfilePageType
+    dispatch:(action:ActionsType)=>void
 
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
 
 }
 
@@ -22,8 +21,7 @@ export const Profile = (props: PropsType) => {
             <ProfileInfo/>
 
             <MyPosts posts={props.profilePage}
-                     addPost={props.addPost}
-                     updateNewPostText={props.updateNewPostText}
+                                          dispatch={props.dispatch}
             />
         </div>
     );
