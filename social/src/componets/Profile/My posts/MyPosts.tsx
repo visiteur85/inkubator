@@ -2,7 +2,7 @@ import React, {LegacyRef} from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {} from "../../../App";
-import {ActionsType, ProfilePageType} from "../../../Redux/state";
+import {ActionsType, addPostActionCreator, ProfilePageType, updateNewPostActionCreator} from "../../../Redux/state";
 
 
 type PropsType = {
@@ -10,9 +10,7 @@ type PropsType = {
 
     dispatch:(action:ActionsType)=>void
 
-}
-
-
+};
 export const MyPosts = (props: PropsType) => {
 
 
@@ -21,17 +19,18 @@ export const MyPosts = (props: PropsType) => {
 
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            props.dispatch({type:"ADD-POST"})
+            // props.dispatch({type:"ADD-POST"})
+            props.dispatch(addPostActionCreator())
         }
-    }
+    };
 
     const onPostChange = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
 
-            props.dispatch({type: "UPDATE-NEW-POST", newText:text});
+            props.dispatch(updateNewPostActionCreator(text));
         }
-    }
+    };
 
 
     return (
