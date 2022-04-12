@@ -2,7 +2,7 @@ import React, {LegacyRef} from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {} from "../../../App";
-import {ActionsType, addPostActionCreator, ProfilePageType, updateNewPostActionCreator} from "../../../Redux/state";
+import {ActionsType, addPostActionCreator, ProfilePageType, updateNewPostAC} from "../../../Redux/state";
 
 
 type PropsType = {
@@ -28,7 +28,7 @@ export const MyPosts = (props: PropsType) => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
 
-            props.dispatch(updateNewPostActionCreator(text));
+            props.dispatch(updateNewPostAC(text));
         }
     };
 

@@ -20,6 +20,7 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogPropsType>
     messages: Array<MessagePropsType>
+    newMessageBody:string
 }
 export type SidebarType = {};
 export type RootStateType = {
@@ -44,7 +45,17 @@ export type UpdateNewPostTextActionType = {
     newText: string
 
 };
-export type ActionsType = AddPostActionType | UpdateNewPostTextActionType
+export type updateNewMessageBodyActionType = {
+    type: "UPDATE-NEW-MESSAGE-BODY"
+    body:string
+};
+export type sendMessageBodyActionType = {
+    type: "SEND-MESSAGE"
+    
+};
+//типы наших AC
+export type ActionsType = AddPostActionType | UpdateNewPostTextActionType |
+updateNewMessageBodyActionType | sendMessageBodyActionType;
 
 
 export const addPostActionCreator = ():AddPostActionType=> {
@@ -53,10 +64,26 @@ export const addPostActionCreator = ():AddPostActionType=> {
     }as const
 };
 
-export let updateNewPostActionCreator = (text:string):UpdateNewPostTextActionType => {
+export let updateNewPostAC = (text:string):UpdateNewPostTextActionType => {
     return {
         type: "UPDATE-NEW-POST",
         newText:text
+    }as const
+};
+//экшн добавляет сообщение в dialogs
+export let updateNewMessageBodyAC = (body:string):updateNewMessageBodyActionType => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-BODY",
+        body:body
+       
+    }as const
+};
+//экшн отправляет сообщение в dialogs
+export let sendMessageBody = ():sendMessageBodyActionType => {
+    return {
+        type: "SEND-MESSAGE",
+        
+       
     }as const
 };
 
@@ -83,8 +110,12 @@ export let store: StoreType = {
             messages: [
                 {id: 1, message: "HI"},
                 {id: 2, message: "How are you"},
-                {id: 3, message: "Peace"}
-            ]
+                {id: 3, message: "Peace"},
+                {id: 4, message: "Peace"},
+                {id: 5, message: "Peace"},
+            ],
+            newMessageBody:""
+
         },
         sidebar: {}
 
@@ -114,7 +145,17 @@ export let store: StoreType = {
             this._state.profilePage.newPostText = action.newText;
             this._onChange(this._state)
         }
+        else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+            this._state.dialogsPage.newMessageBody = action.body;
+            this._onChange(this._state)
+        }
+        else if (action.type === "SEND-MESSAGE") {
+
+            let body = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = "";
+            this._state.dialogsPage.messages.push({id: 6, message: body})
+            this._onChange(this._state)
+        }
     },
 
 };
-//gjnjv elfkbnm

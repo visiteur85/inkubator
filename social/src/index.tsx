@@ -14,7 +14,8 @@ import App from "./App";
         <BrowserRouter>
 
             <App appState={state}
-                            dispatch={store.dispatch.bind(store)}/>
+                            dispatch={store.dispatch.bind(store)}
+                            store={store}/>
         </BrowserRouter>
         ,
         document.getElementById('root'),
