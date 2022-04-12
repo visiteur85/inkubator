@@ -43,7 +43,7 @@ export const MyPosts = (props: PropsType) => {
                               value={props.posts.newPostText}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>ADD post</button>
+                    <button onClick={addPost}>ADd post</button>
                 </div>
 
             </div>
