@@ -1,3 +1,6 @@
+import { dialogsReducer, sendMessageBodyActionType, updateNewMessageBodyActionType } from "./dialog-reducer";
+import { AddPostActionType, profileReducer, UpdateNewPostTextActionType } from "./profile-reducer";
+
 export type PostPropsType = {
     id: number
     message: string
@@ -37,55 +40,55 @@ export type StoreType = {
     dispatch:(action: ActionsType)=>void
 
 }
-export type AddPostActionType = {
-      type: "ADD-POST"
-  };
-export type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST"
-    newText: string
-
-};
-export type updateNewMessageBodyActionType = {
-    type: "UPDATE-NEW-MESSAGE-BODY"
-    body:string
-};
-export type sendMessageBodyActionType = {
-    type: "SEND-MESSAGE"
-    
-};
 //типы наших AC
+// export type AddPostActionType = {
+//       type: "ADD-POST"
+//   };
+// export type UpdateNewPostTextActionType = {
+//     type: "UPDATE-NEW-POST"
+//     newText: string
+
+// };
+// export type updateNewMessageBodyActionType = {
+//     type: "UPDATE-NEW-MESSAGE-BODY"
+//     body:string
+// };
+// export type sendMessageBodyActionType = {
+//     type: "SEND-MESSAGE"
+    
+// };
 export type ActionsType = AddPostActionType | UpdateNewPostTextActionType |
 updateNewMessageBodyActionType | sendMessageBodyActionType;
 
 
-export const addPostActionCreator = ():AddPostActionType=> {
-    return {
-        type: "ADD-POST"
-    }as const
-};
+// export const addPostActionCreator = ():AddPostActionType=> {
+//     return {
+//         type: "ADD-POST"
+//     }as const
+// };
 
-export let updateNewPostAC = (text:string):UpdateNewPostTextActionType => {
-    return {
-        type: "UPDATE-NEW-POST",
-        newText:text
-    }as const
-};
+// export let updateNewPostAC = (text:string):UpdateNewPostTextActionType => {
+//     return {
+//         type: "UPDATE-NEW-POST",
+//         newText:text
+//     }as const
+// };
 //экшн добавляет сообщение в dialogs
-export let updateNewMessageBodyAC = (body:string):updateNewMessageBodyActionType => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-BODY",
-        body:body
+// export let updateNewMessageBodyAC = (body:string):updateNewMessageBodyActionType => {
+//     return {
+//         type: "UPDATE-NEW-MESSAGE-BODY",
+//         body:body
        
-    }as const
-};
+//     }as const
+// };
 //экшн отправляет сообщение в dialogs
-export let sendMessageBody = ():sendMessageBodyActionType => {
-    return {
-        type: "SEND-MESSAGE",
+// export let sendMessageBody = ():sendMessageBodyActionType => {
+//     return {
+//         type: "SEND-MESSAGE",
         
        
-    }as const
-};
+//     }as const
+// };
 
 export let store: StoreType = {
     _state: {
@@ -134,28 +137,34 @@ export let store: StoreType = {
 
 
     dispatch(action) {
-        if (action.type === "ADD-POST") {
-            let newPost: PostPropsType = {id: 5, message: this._state.profilePage.newPostText, likesCount: 15};
 
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = ""
-            this._onChange(this._state);
-        }
-        else if (action.type === "UPDATE-NEW-POST") {
-            this._state.profilePage.newPostText = action.newText;
-            this._onChange(this._state)
-        }
-        else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
-            this._state.dialogsPage.newMessageBody = action.body;
-            this._onChange(this._state)
-        }
-        else if (action.type === "SEND-MESSAGE") {
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._onChange(this._state)
 
-            let body = this._state.dialogsPage.newMessageBody;
-            this._state.dialogsPage.newMessageBody = "";
-            this._state.dialogsPage.messages.push({id: 6, message: body})
-            this._onChange(this._state)
-        }
-    },
 
-};
+    //     if (action.type === "ADD-POST") {
+    //         let newPost: PostPropsType = {id: 5, message: this._state.profilePage.newPostText, likesCount: 15};
+
+    //         this._state.profilePage.posts.push(newPost);
+    //         this._state.profilePage.newPostText = ""
+    //         this._onChange(this._state);
+    //     }
+    //     else if (action.type === "UPDATE-NEW-POST") {
+    //         this._state.profilePage.newPostText = action.newText;
+    //         this._onChange(this._state)
+    //     }
+    //     else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+    //         this._state.dialogsPage.newMessageBody = action.body;
+    //         this._onChange(this._state)
+    //     }
+    //     else if (action.type === "SEND-MESSAGE") {
+
+    //         let body = this._state.dialogsPage.newMessageBody;
+    //         this._state.dialogsPage.newMessageBody = "";
+    //         this._state.dialogsPage.messages.push({id: 6, message: body})
+    //         this._onChange(this._state)
+    //     }
+    // },
+
+}}

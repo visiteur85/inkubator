@@ -2,7 +2,8 @@ import React, {LegacyRef} from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {} from "../../../App";
-import {ActionsType, addPostActionCreator, ProfilePageType, updateNewPostAC} from "../../../Redux/state";
+import {ActionsType, ProfilePageType} from "../../../Redux/state";
+import { addPostActionCreator, updateNewPostAC } from '../../../Redux/profile-reducer';
 
 
 type PropsType = {

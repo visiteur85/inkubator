@@ -2,7 +2,8 @@ import React from "react";
 import s from "./Dialogs.module.css";
 import { NavLink } from "react-router-dom";
 
-import { ActionsType, DialogPropsType, sendMessageBody, StoreType, updateNewMessageBodyAC } from "../../Redux/state";
+import { ActionsType, DialogPropsType, StoreType, } from "../../Redux/state";
+import { sendMessageBody, updateNewMessageBodyAC } from "../../Redux/dialog-reducer";
 
 type PropsType = {
   
