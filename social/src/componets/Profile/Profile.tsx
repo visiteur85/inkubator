@@ -3,14 +3,14 @@ import s from "./profile.module.css"
 import {MyPosts} from "./My posts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {} from "../../App";
-import {ActionsType, ProfilePageType} from "../../Redux/state";
+// import {ActionsType, ProfilePageType} from "../../Redux/store";
+import {Dispatch} from "redux";
+import {ProfilePageType} from "../../Redux/profile-reducer";
 
 
 type PropsType = {
     profilePage: ProfilePageType
-    dispatch:(action:ActionsType)=>void
-
-
+    dispatch: Dispatch
 }
 
 export const Profile = (props: PropsType) => {
@@ -20,7 +20,7 @@ export const Profile = (props: PropsType) => {
         <div>
             <ProfileInfo/>
 
-            <MyPosts posts={props.profilePage}
+            <MyPosts profilePage={props.profilePage}
                                           dispatch={props.dispatch}
             />
         </div>

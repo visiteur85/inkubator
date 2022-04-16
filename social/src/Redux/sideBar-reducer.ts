@@ -1,6 +1,9 @@
 import React from 'react';
-import { DialogPageType, ProfilePageType, SidebarType } from './state';
+import {  } from './store';
 
-export const sideBarReducer = (state: SidebarType, action:any)=> {
+export type SidebarType = {};
+let initialState: SidebarType = {}
+
+export const sideBarReducer = (state = initialState, action:any)=> {
     return state
 }

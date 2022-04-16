@@ -2,16 +2,17 @@ import React from "react";
 import s from "./Dialogs.module.css";
 import { NavLink } from "react-router-dom";
 
-import { ActionsType, DialogPropsType, StoreType, } from "../../Redux/state";
+import {RootReducerType} from "../../Redux/redux-store";
 import { sendMessageBody, updateNewMessageBodyAC } from "../../Redux/dialog-reducer";
+import {Dispatch} from "redux";
 
 type PropsType = {
-  
-  store:StoreType
+  dispatch: Dispatch
+  store: RootReducerType
 };
 export const Dialogs = (props: PropsType) => {
 //достаем диалогпЭйдж из стора
-  let state = props.store.getState().dialogsPage;
+  let state = props.store.dialogsPage;
   
   let dialogsElements = state.dialogs.map((dialog, index) => (
     <DialogItem key={index} name={dialog.name} id={dialog.id} />
@@ -21,16 +22,16 @@ export const Dialogs = (props: PropsType) => {
     <Message key={index} message={message.message} />
   ));
 
-  let newMessageBody = props.store._state.dialogsPage.newMessageBody;
+  let newMessageBody = props.store.dialogsPage.newMessageBody;
 //функция отправляет сообщеине в dialogs
   let onSendMessageClick = () => {
-    props.store.dispatch(sendMessageBody())
+    props.dispatch(sendMessageBody())
 
   }
 
   let onNewMessageChange = (e:any) => {
 let body = e.target.value;
-props.store.dispatch(updateNewMessageBodyAC(body))
+props.dispatch(updateNewMessageBodyAC(body))
 
   }
 

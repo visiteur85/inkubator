@@ -2,14 +2,16 @@ import React, {LegacyRef} from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {} from "../../../App";
-import {ActionsType, ProfilePageType} from "../../../Redux/state";
-import { addPostActionCreator, updateNewPostAC } from '../../../Redux/profile-reducer';
+
+// import {ActionsType, ProfilePageType} from "../../../Redux/store";
+import {addPostActionCreator, ProfilePageType, updateNewPostAC} from '../../../Redux/profile-reducer';
+import {Dispatch} from "redux";
 
 
 type PropsType = {
-    posts: ProfilePageType
+    profilePage: ProfilePageType
 
-    dispatch:(action:ActionsType)=>void
+    dispatch: Dispatch
 
 };
 export const MyPosts = (props: PropsType) => {
@@ -41,7 +43,7 @@ export const MyPosts = (props: PropsType) => {
                 <div>
                     <textarea ref={newPostElement}
                               onChange={onPostChange}
-                              value={props.posts.newPostText}/>
+                              value={props.profilePage.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>ADd post</button>
@@ -49,7 +51,7 @@ export const MyPosts = (props: PropsType) => {
 
             </div>
             <div className={s.posts}>
-                {props.posts.posts.map((post, index) =>
+                {props.profilePage.posts.map((post, index) =>
                     <Post key={index} message={post.message}
                           likesCount={post.likesCount}/>)}
 
