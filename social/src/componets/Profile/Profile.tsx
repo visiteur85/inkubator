@@ -6,11 +6,14 @@ import {} from "../../App";
 // import {ActionsType, ProfilePageType} from "../../Redux/store";
 import {Dispatch} from "redux";
 import {ProfilePageType} from "../../Redux/profile-reducer";
+import {MyPostsContainer} from "./My posts/MyPostsContainer";
+import {RootStateType} from "../../Redux/store";
 
 
 type PropsType = {
     profilePage: ProfilePageType
     dispatch: Dispatch
+    // store: RootStateType
 }
 
 export const Profile = (props: PropsType) => {
@@ -20,7 +23,9 @@ export const Profile = (props: PropsType) => {
         <div>
             <ProfileInfo/>
 
-            <MyPosts profilePage={props.profilePage}
+            <MyPostsContainer
+                // store={props.store}
+                profilePage={props.profilePage}
                                           dispatch={props.dispatch}
             />
         </div>

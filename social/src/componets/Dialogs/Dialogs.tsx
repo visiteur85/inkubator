@@ -3,35 +3,42 @@ import s from "./Dialogs.module.css";
 import { NavLink } from "react-router-dom";
 
 import {RootReducerType} from "../../Redux/redux-store";
-import { sendMessageBody, updateNewMessageBodyAC } from "../../Redux/dialog-reducer";
+import {DialogPropsType, sendMessageBody, updateNewMessageBodyAC} from "../../Redux/dialog-reducer";
 import {Dispatch} from "redux";
 
 type PropsType = {
-  dispatch: Dispatch
-  store: RootReducerType
+  // dispatch: Dispatch
+  // store: RootReducerType
+  sendMessageBody:()=>void
+  updateNewMessageBodyAC:(body:string)=>void
+  dialogs: DialogPropsType[]
+  messages:MessagePropsType[]
+  newMessageBody:string
 };
 export const Dialogs = (props: PropsType) => {
 //достаем диалогпЭйдж из стора
-  let state = props.store.dialogsPage;
+//   let state = props.store.dialogsPage;
   
-  let dialogsElements = state.dialogs.map((dialog, index) => (
+  let dialogsElements = props.dialogs.map((dialog, index) => (
     <DialogItem key={index} name={dialog.name} id={dialog.id} />
   ));
 
-  let messageElements = state.messages.map((message, index) => (
+  let messageElements = props.messages.map((message, index) => (
     <Message key={index} message={message.message} />
   ));
 
-  let newMessageBody = props.store.dialogsPage.newMessageBody;
+  let newMessageBody = props.newMessageBody;
 //функция отправляет сообщеине в dialogs
   let onSendMessageClick = () => {
-    props.dispatch(sendMessageBody())
+    // props.dispatch(sendMessageBody())
+    props.sendMessageBody()
 
-  }
+  };
 
   let onNewMessageChange = (e:any) => {
 let body = e.target.value;
-props.dispatch(updateNewMessageBodyAC(body))
+// props.dispatch(updateNewMessageBodyAC(body))
+    props.updateNewMessageBodyAC(body)
 
   }
 

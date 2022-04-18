@@ -12,6 +12,7 @@ import {CombinedState, Dispatch} from "redux";
 import {ProfilePageType} from "./Redux/profile-reducer";
 import {DialogPageType} from "./Redux/dialog-reducer";
 import {SidebarType} from "./Redux/sideBar-reducer";
+import {DialogsContainer} from "./componets/Dialogs/DialogsContainer";
 
 
 type PropsType = {
@@ -29,13 +30,13 @@ const App = (props: PropsType) => {
             <Navbar/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route path={"/dialogs"} element={<Dialogs
+                    <Route path={"/dialogs"} element={<DialogsContainer
                         dispatch={props.dispatch}
                                                                store={props.store}/>}
                                                                
                                                                />
                     <Route path={"/profile"} element={<Profile profilePage={props.store.profilePage}
-
+// store={props.store}
                                                                dispatch={props.dispatch}
                     />}/>
 

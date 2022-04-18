@@ -6,12 +6,18 @@ import {} from "../../../App";
 // import {ActionsType, ProfilePageType} from "../../../Redux/store";
 import {addPostActionCreator, ProfilePageType, updateNewPostAC} from '../../../Redux/profile-reducer';
 import {Dispatch} from "redux";
+import {PostPropsType} from "../../../Redux/store";
 
 
 type PropsType = {
-    profilePage: ProfilePageType
+    // profilePage: ProfilePageType
+    updateNewPostText:(text:string)=>void
+    addPost:()=>void
+    newPostText:string
+    posts:PostPropsType[]
 
-    dispatch: Dispatch
+
+    // dispatch: Dispatch
 
 };
 export const MyPosts = (props: PropsType) => {
@@ -19,19 +25,19 @@ export const MyPosts = (props: PropsType) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     const addPost = () => {
-
         if (newPostElement.current) {
             let text = newPostElement.current.value;
             // props.dispatch({type:"ADD-POST"})
-            props.dispatch(addPostActionCreator())
+            props.addPost()
+            // props.dispatch(addPostActionCreator())
         }
     };
 
     const onPostChange = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-
-            props.dispatch(updateNewPostAC(text));
+            props.updateNewPostText(text);
+            // props.dispatch(updateNewPostAC(text));
         }
     };
 
@@ -43,7 +49,8 @@ export const MyPosts = (props: PropsType) => {
                 <div>
                     <textarea ref={newPostElement}
                               onChange={onPostChange}
-                              value={props.profilePage.newPostText}/>
+                              value={props.newPostText}/>
+                    {/*value={props.profilePage.newPostText}/>*/}
                 </div>
                 <div>
                     <button onClick={addPost}>ADd post</button>
@@ -51,7 +58,7 @@ export const MyPosts = (props: PropsType) => {
 
             </div>
             <div className={s.posts}>
-                {props.profilePage.posts.map((post, index) =>
+                {props.posts.map((post, index) =>
                     <Post key={index} message={post.message}
                           likesCount={post.likesCount}/>)}
 
