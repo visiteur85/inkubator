@@ -7,13 +7,13 @@ import {} from "../../App";
 import {Dispatch} from "redux";
 import {ProfilePageType} from "../../Redux/profile-reducer";
 import {MyPostsContainer} from "./My posts/MyPostsContainer";
-import {RootStateType} from "../../Redux/store";
+
 
 
 type PropsType = {
-    profilePage: ProfilePageType
-    dispatch: Dispatch
-    // store: RootStateType
+    // profilePage: ProfilePageType
+    // dispatch: Dispatch
+    // // store: RootStateType
 }
 
 export const Profile = (props: PropsType) => {
@@ -25,8 +25,8 @@ export const Profile = (props: PropsType) => {
 
             <MyPostsContainer
                 // store={props.store}
-                profilePage={props.profilePage}
-                                          dispatch={props.dispatch}
+                // profilePage={props.profilePage}
+                //                           dispatch={props.dispatch}
             />
         </div>
     );

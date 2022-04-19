@@ -4,9 +4,9 @@ import {Post} from "./Post/Post";
 import {} from "../../../App";
 
 // import {ActionsType, ProfilePageType} from "../../../Redux/store";
-import {addPostActionCreator, ProfilePageType, updateNewPostAC} from '../../../Redux/profile-reducer';
+import {addPostActionCreator, PostPropsType, ProfilePageType, updateNewPostAC} from '../../../Redux/profile-reducer';
 import {Dispatch} from "redux";
-import {PostPropsType} from "../../../Redux/store";
+
 
 
 type PropsType = {
