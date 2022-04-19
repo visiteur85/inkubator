@@ -2,22 +2,12 @@ import React from "react";
 import s from "./Dialogs.module.css";
 import { NavLink } from "react-router-dom";
 
-import {RootReducerType} from "../../Redux/redux-store";
-import {DialogPropsType, sendMessageBody, updateNewMessageBodyAC} from "../../Redux/dialog-reducer";
-import {Dispatch} from "redux";
+import {DialogsPropsType,} from "./DialogsContainer";
 
-type PropsType = {
-  // dispatch: Dispatch
-  // store: RootReducerType
-  sendMessageBody:()=>void
-  updateNewMessageBodyAC:(body:string)=>void
-  dialogs: DialogPropsType[]
-  messages:MessagePropsType[]
-  newMessageBody:string
-};
-export const Dialogs = (props: PropsType) => {
-//достаем диалогпЭйдж из стора
-//   let state = props.store.dialogsPage;
+
+export const Dialogs = (props:DialogsPropsType ) => {
+
+
   
   let dialogsElements = props.dialogs.map((dialog, index) => (
     <DialogItem key={index} name={dialog.name} id={dialog.id} />

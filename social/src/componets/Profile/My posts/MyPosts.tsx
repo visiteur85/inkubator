@@ -3,33 +3,21 @@ import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {} from "../../../App";
 
-// import {ActionsType, ProfilePageType} from "../../../Redux/store";
-import {addPostActionCreator, PostPropsType, ProfilePageType, updateNewPostAC} from '../../../Redux/profile-reducer';
-import {Dispatch} from "redux";
+
+import {MyPostsPropsType} from "./MyPostsContainer";
 
 
 
-type PropsType = {
-    // profilePage: ProfilePageType
-    updateNewPostText:(text:string)=>void
-    addPost:()=>void
-    newPostText:string
-    posts:PostPropsType[]
 
-
-    // dispatch: Dispatch
-
-};
-export const MyPosts = (props: PropsType) => {
+export const MyPosts = (props: MyPostsPropsType) => {
 
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     const addPost = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            // props.dispatch({type:"ADD-POST"})
-            props.addPost()
-            // props.dispatch(addPostActionCreator())
+                   props.addPost()
+
         }
     };
 
@@ -37,7 +25,7 @@ export const MyPosts = (props: PropsType) => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
             props.updateNewPostText(text);
-            // props.dispatch(updateNewPostAC(text));
+
         }
     };
 

@@ -4,72 +4,44 @@ import {Post} from "./Post/Post";
 import {} from "../../../App";
 
 
-import {addPostActionCreator, ProfilePageType, updateNewPostAC} from '../../../Redux/profile-reducer';
+import {addPostActionCreator, PostPropsType, updateNewPostAC} from '../../../Redux/profile-reducer';
 import {MyPosts} from "./MyPosts";
-import {StoreContext} from "../../../StoreContext";
-import {RootReducerType, store, StoreType} from "../../../Redux/redux-store";
+
+import {RootReducerType} from "../../../Redux/redux-store";
+import {Dispatch} from "redux";
+
+import {connect} from "react-redux";
 
 
-type PropsType = {
-    // profilePage: ProfilePageType
-    // // store: RootStateType
-    // dispatch: Dispatch
-
-};
-export const MyPostsContainer = (props: PropsType) => {
 
 
-    // let newPostElement = React.createRef<HTMLTextAreaElement>();
-    // const addPost = () => {
-    //     // if (newPostElement.current) {
-    //     //     let text = newPostElement.current.value;
-    //     // props.dispatch({type:"ADD-POST"})
-    //     // props.addPost()
-    //     props.dispatch(addPostActionCreator())
-    //
-    // };
-    //
-    //
-    // const onPostChange = (text: string) => {
-    //     // if (newPostElement.current) {
-    //
-    //     // props.updateNewPostText(text);
-    //     props.dispatch(updateNewPostAC(text));
-    //     // }
-    // };
+ type MapStateToPropsType = {
+     newPostText:string
+     posts:PostPropsType[]
+}
+
+export type MapDispatchToPropsType = {
+    updateNewPostText:(text:string)=>void
+    addPost:()=>void
+}
+
+export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 
-    return (
-        <StoreContext.Consumer>{
-            (store) => {
-                const addPost = () => {
-                    // if (newPostElement.current) {
-                    //     let text = newPostElement.current.value;
-                    // props.dispatch({type:"ADD-POST"})
-                    // props.addPost()
-                    store.dispatch(addPostActionCreator())
-
-                };
-
-
-                const onPostChange = (text: string) => {
-                    // if (newPostElement.current) {
-
-                    // props.updateNewPostText(text);
-                    store.dispatch(updateNewPostAC(text));
-                    // }
-                };
-                let state = store.getState()
-                return (
-                    <MyPosts updateNewPostText={onPostChange}
-                             addPost={addPost}
-                             newPostText={state.profilePage.newPostText}
-                             posts={state.profilePage.posts}/>
-                )
-            }}
-        </StoreContext.Consumer>
-
-    );
+const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
+    return {
+        newPostText:state.profilePage.newPostText,
+        posts:state.profilePage.posts
+    }
 };
 
-
+const mapDispatchToProps = (dispatch:Dispatch): MapDispatchToPropsType => {
+    return {
+        updateNewPostText: (text:string)=>{
+            dispatch(updateNewPostAC(text))
+        },
+        addPost:()=>{
+            dispatch(addPostActionCreator())}
+    }
+};
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);

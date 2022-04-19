@@ -9,7 +9,7 @@ import {ProfileActionsType, ProfilePageType} from "./Redux/profile-reducer";
 import {DialogPageType, DialogsActionsType} from "./Redux/dialog-reducer";
 import {SidebarType} from "./Redux/sideBar-reducer";
 import {Provider} from "react-redux";
-import {StoreContext} from "./StoreContext";
+
 import {RootReducerType, store} from "./Redux/redux-store";
 
 
@@ -26,12 +26,12 @@ import {RootReducerType, store} from "./Redux/redux-store";
 const renderTree = (state: RootReducerType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <StoreContext.Provider value={store}>
-            <App
-                            // dispatch={store.dispatch.bind(store)}
-                            // store={state}
-            />
-            </StoreContext.Provider>
+            <Provider store={store}>
+                <App
+                    // dispatch={store.dispatch.bind(store)}
+                    // store={state}
+                />
+            </Provider>
         </BrowserRouter>,
         document.getElementById('root'),
     );

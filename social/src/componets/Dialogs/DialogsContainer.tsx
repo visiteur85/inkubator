@@ -3,57 +3,47 @@ import s from "./Dialogs.module.css";
 import { NavLink } from "react-router-dom";
 
 import {RootReducerType} from "../../Redux/redux-store";
-import { sendMessageBody, updateNewMessageBodyAC } from "../../Redux/dialog-reducer";
+import {DialogPropsType, sendMessageBody, updateNewMessageBodyAC} from "../../Redux/dialog-reducer";
 import {Dispatch} from "redux";
-import {Dialogs} from "./Dialogs";
-import {StoreContext} from "../../StoreContext";
+import {Dialogs, MessagePropsType} from "./Dialogs";
+import {connect} from "react-redux";
 
 
-type PropsType = {
-  // dispatch: Dispatch
-  // store: RootReducerType
+
+
+export type MapStateToPropsType = {
+  dialogs: Array<DialogPropsType>
+  messages: Array<MessagePropsType>
+  newMessageBody:string
+}
+
+export type MapDispatchToPropsType = {
+  updateNewMessageBodyAC:(body:string)=>void
+  sendMessageBody:()=>void
+}
+export type  DialogsPropsType = MapDispatchToPropsType & MapStateToPropsType;
+
+const mapStateToProps = (state: RootReducerType): MapStateToPropsType  => {
+return {
+  dialogs: state.dialogsPage.dialogs,
+  messages: state.dialogsPage.messages,
+  newMessageBody: state.dialogsPage.newMessageBody
+
+}
 };
-export const DialogsContainer = (props: PropsType) => {
 
-
-
-
-
-  return (
-      <StoreContext.Consumer>{
-          (store)=> {
-            let state = store.getState()
-            //достаем диалогпЭйдж из стора
-
-            let newMessageBody = state.dialogsPage.newMessageBody;
-            //функция отправляет сообщеине в dialogs
-            let onSendMessageClick = () => {
-              store.dispatch(sendMessageBody())
-
-            };
-            let onNewMessageChange = (body:string) => {
-
-              store.dispatch(updateNewMessageBodyAC(body))
-
-            };
-
-
-
-            return (
-            <Dialogs
-                // dispatch={}
-                //      store={}
-                sendMessageBody={onSendMessageClick}
-                updateNewMessageBodyAC={onNewMessageChange}
-                dialogs={state.dialogsPage.dialogs}
-                messages={state.dialogsPage.messages}
-                newMessageBody={newMessageBody}
-
-
-            />
-            )}}</StoreContext.Consumer>
-  );
+const mapDispatchToProps = (dispatch:Dispatch): MapDispatchToPropsType  => {
+  return {
+    updateNewMessageBodyAC: (body:string)=>{
+      dispatch(updateNewMessageBodyAC(body))
+    },
+    sendMessageBody:()=>{
+      dispatch(sendMessageBody())}
+  }
 };
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+  
+
 
 
 
