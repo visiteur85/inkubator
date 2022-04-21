@@ -23,7 +23,7 @@ import {RootReducerType, store} from "./Redux/redux-store";
 // };
 
 
-const renderTree = (state: RootReducerType) => {
+// const renderTree = (state: RootReducerType) => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
@@ -35,13 +35,14 @@ const renderTree = (state: RootReducerType) => {
         </BrowserRouter>,
         document.getElementById('root'),
     );
-}
+// }
 
-renderTree(store.getState());
-store.subscribe(() => {
-    let state = store.getState
-    renderTree(state())
-})
+// renderTree(store.getState());
+// store.subscribe(() => {
+//     let state = store.getState
+//     renderTree(state())
+// })
+
 
 
 

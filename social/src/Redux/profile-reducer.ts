@@ -1,3 +1,4 @@
+import { Post } from './../componets/Profile/My posts/Post/Post';
 import React from 'react';
 
 
@@ -25,14 +26,22 @@ export const profileReducer = (state = initialState, action:ProfileActionsType )
 switch(action.type){
     case "ADD-POST": {
         let newPost: PostPropsType = {id: 5, message: state.newPostText, likesCount: 15};
+        let newState = {...state};
+        newState.posts = [...state.posts];
+        newState.posts.push(newPost);
+        newState.newPostText = "";
 
-        state.posts.push(newPost);
-        state.newPostText = "";
-        return state
+        // state.posts.push(newPost);
+        // state.newPostText = "";
+        return newState
     }
     case "UPDATE-NEW-POST": {
-        state.newPostText = action.newText;}
-        return state
+
+        let newState = {...state};
+        
+        newState.newPostText = action.newText;
+        return newState;}
+        
 
     }
 return state
