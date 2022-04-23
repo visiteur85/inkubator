@@ -18,12 +18,12 @@ import {connect} from "react-redux";
  type MapStateToPropsType = {
      newPostText:string
      posts:PostPropsType[]
-}
+};
 
 export type MapDispatchToPropsType = {
     updateNewPostText:(text:string)=>void
     addPost:()=>void
-}
+};
 
 export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
 

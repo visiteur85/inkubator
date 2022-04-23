@@ -9,14 +9,11 @@ import { RootReducerType } from "./Redux/redux-store";
 
 import { CombinedState, Dispatch } from "redux";
 import { DialogsContainer } from "./componets/Dialogs/DialogsContainer";
+import {  UsersContainer } from "./componets/Users/UsersContainer";
 
-type PropsType = {
-  // // appState: RootReducerType
-  // dispatch: Dispatch
-  // store: RootReducerType
-};
 
-const App = (props: PropsType) => {
+
+const App = () => {
   return (
     <div className="app-wrapper">
       <Header />
@@ -25,6 +22,7 @@ const App = (props: PropsType) => {
         <Routes>
           <Route path={"/dialogs"} element={<DialogsContainer />} />
           <Route path={"/profile"} element={<Profile />} />
+          <Route path={"/users"} element={<UsersContainer/>} />
 
           {/*<Route path={"/news"} element={<News/>}/>*/}
           {/*<Route path={"/music"} element={<Music/>}/>*/}
