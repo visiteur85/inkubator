@@ -11,38 +11,46 @@ type PropsType = {
 };
 
 export const Users = (props: PropsType) => {
-    if (props.items.length === 0) {
 
-        axios.get("https://social-network.samuraijs.com/api/1.0/users", {headers: {
-            'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
-        }})
+    const getUsers = () => {
 
-            .then(response => {
-                props.setUsers(response.data.items)
+
+        if (props.items.length === 0) {
+
+            axios.get("https://social-network.samuraijs.com/api/1.0/users", {
+                headers: {
+                    'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
+                }
             })
-        // props.setUsers(
-        //     [
-        //         {
-        //             id: 1, photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
-        //             followed: false, fullName: "Pavel", status: "I am boss", location: {city: "Minsk", country: "Belarus"}
-        //         },
-        //         {
-        //             id: 2, photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
-        //             followed: true, fullName: "Sasha", status: "I am boss too", location: {city: "New-York", country: "USA"}
-        //         },
-        //         {
-        //             id: 3,
-        //             photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
-        //             followed: false,
-        //             fullName: "Andrew",
-        //             status: "I am boss too too)",
-        //             location: {city: "Kiev", country: "Ukrain"}
-        //         }
-        //     ]
-        // )
+
+                .then(response => {
+                    props.setUsers(response.data.items)
+                })
+            // props.setUsers(
+            //     [
+            //         {
+            //             id: 1, photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
+            //             followed: false, fullName: "Pavel", status: "I am boss", location: {city: "Minsk", country: "Belarus"}
+            //         },
+            //         {
+            //             id: 2, photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
+            //             followed: true, fullName: "Sasha", status: "I am boss too", location: {city: "New-York", country: "USA"}
+            //         },
+            //         {
+            //             id: 3,
+            //             photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
+            //             followed: false,
+            //             fullName: "Andrew",
+            //             status: "I am boss too too)",
+            //             location: {city: "Kiev", country: "Ukrain"}
+            //         }
+            //     ]
+            // )
+        }
     }
     return (
         <div>
+            <button onClick={getUsers}> get Users</button>
             {props.items.map((user) => {
 
                 return <div key={user.id}>
