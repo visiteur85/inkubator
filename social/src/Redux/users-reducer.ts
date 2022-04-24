@@ -3,21 +3,22 @@ import React from 'react';
 
 export type UsersPageType =
     {
-        users: Array<OneUserType>
+        items: Array<OneUserType>
+
     }
 
 export type OneUserType = {
+    name: string
     id: number
+    uniqueUrlName:string | null
+    photos: photosType
+    status: string | null
     followed: boolean
-    fullName: string
-    status: string
-    location: LocationUserType
-    photoURl: string
 
 }
-export type LocationUserType = {
-    city: string
-    country: string
+export type photosType = {
+    small: string | null
+    large: string | null
 };
 
 export type UsersActionsType = FollowType | UnFollowType | setUserACType;
@@ -34,12 +35,12 @@ export type UnFollowType = {
 };
 export type setUserACType = {
     type: "SET-USERS"
-    users: Array<OneUserType>
+    items: Array<OneUserType>
 
 };
 
 let initialState: UsersPageType = {
-    users:
+    items:
         [
         // {
         //     id: 1, photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
@@ -65,19 +66,19 @@ export const usersReducer = (state = initialState, action: UsersActionsType) => 
         
             // console.log(action.userId)
 
-            let newState = { ...state, users: state.users.map(user => user.id === action.userId ?
+            let newState = { ...state, items: state.items.map(user => user.id === action.userId ?
                     { ...user, followed: true } : user) }
             // console.log(newState)
             return newState
         }
         case "UNFOLLOW": {
             // console.log(action.userId)
-            let newState = { ...state, users: state.users.map(user => user.id === action.userId ?
+            let newState = { ...state, items: state.items.map(user => user.id === action.userId ?
                     { ...user, followed: false } : user) }
             return newState
         }
         case "SET-USERS": {
-            let newState = { ...state, users: action.users }
+            let newState = { ...state, items: action.items }
             return newState
         }
         default: return state
@@ -101,10 +102,10 @@ export let unfollowAC = (userId: number): UnFollowType => {
     } as const
 };
 
-export let setUserAC = (users: Array<OneUserType>): setUserACType => {
+export let setUserAC = (items: Array<OneUserType>): setUserACType => {
     return {
         type: "SET-USERS",
-        users: users
+        items: items
 
     } as const
 };

@@ -1,44 +1,56 @@
 import React from "react";
 import {OneUserType} from "../../Redux/users-reducer";
 import s from "./users.module.css"
+import axios from "axios";
 
 type PropsType = {
-    users: Array<OneUserType>;
+    items: Array<OneUserType>;
     follow: (userId: number) => void
     unFollow: (userId: number) => void
     setUsers: (users: Array<OneUserType>) => void
 };
 
 export const Users = (props: PropsType) => {
-  if (props.users.length === 0) {
-    props.setUsers(
-        [
-            {
-                id: 1, photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
-                followed: false, fullName: "Pavel", status: "I am boss", location: {city: "Minsk", country: "Belarus"}
-            },
-            {
-                id: 2, photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
-                followed: true, fullName: "Sasha", status: "I am boss too", location: {city: "New-York", country: "USA"}
-            },
-            {
-                id: 3,
-                photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
-                followed: false,
-                fullName: "Andrew",
-                status: "I am boss too too)",
-                location: {city: "Kiev", country: "Ukrain"}
-            }
-        ]
-    )}
+    if (props.items.length === 0) {
+
+        axios.get("https://social-network.samuraijs.com/api/1.0/users", {headers: {
+            'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
+        }})
+
+            .then(response => {
+                props.setUsers(response.data.items)
+            })
+        // props.setUsers(
+        //     [
+        //         {
+        //             id: 1, photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
+        //             followed: false, fullName: "Pavel", status: "I am boss", location: {city: "Minsk", country: "Belarus"}
+        //         },
+        //         {
+        //             id: 2, photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
+        //             followed: true, fullName: "Sasha", status: "I am boss too", location: {city: "New-York", country: "USA"}
+        //         },
+        //         {
+        //             id: 3,
+        //             photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
+        //             followed: false,
+        //             fullName: "Andrew",
+        //             status: "I am boss too too)",
+        //             location: {city: "Kiev", country: "Ukrain"}
+        //         }
+        //     ]
+        // )
+    }
     return (
         <div>
-            {props.users.map((user) => {
-                console.log(user.followed)
+            {props.items.map((user) => {
+
                 return <div key={user.id}>
           <span>
             <div>
-              <img src={user.photoURl} className={s.userPhoto} alt=""/>
+              <img src={user.photos.small !== null ? user.photos.small :
+                  "https://postnauka.ru/files/images/3/3/0/0/0/0/0/0/0/0/thumb/s_OsZAIqDKB_qz1omo5RFbf-W-xqzjAz.jpg"}
+                   className={s.userPhoto} alt=""/>
             </div>
             <div>
               {user.followed ?
@@ -54,15 +66,15 @@ export const Users = (props: PropsType) => {
           </span>
                     <span>
             <span>
-              <div>{user.fullName}</div>
+              <div>{user.name}</div>
               <div>{user.status}</div>
             </span>
             <span>
               <div>
-                {user.location.country}
+                {"user.location.country"}
               </div>
               <div>
-              {user.location.city}
+              {"user.location.city"}
               </div>
             </span>
           </span>
