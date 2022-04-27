@@ -2,6 +2,10 @@ import React from "react";
 import {OneUserType} from "../../Redux/users-reducer";
 import s from "./users.module.css"
 import axios from "axios";
+import {MapStateToPropsType} from "../Dialogs/DialogsContainer";
+import {MapDispatchToPropsType} from "./UsersContainer";
+import {RootReducerType} from "../../Redux/redux-store";
+import {Dispatch} from "redux";
 
 type PropsType = {
     items: Array<OneUserType>;
@@ -10,13 +14,13 @@ type PropsType = {
     setUsers: (users: Array<OneUserType>) => void
 };
 
-export const Users = (props: PropsType) => {
-
-    const getUsers = () => {
 
 
-        if (props.items.length === 0) {
+export class Users extends React.Component<PropsType> {
 
+    constructor(props:PropsType) {
+
+        super(props);
             axios.get("https://social-network.samuraijs.com/api/1.0/users", {
                 headers: {
                     'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
@@ -24,34 +28,18 @@ export const Users = (props: PropsType) => {
             })
 
                 .then(response => {
-                    props.setUsers(response.data.items)
+                    this.props.setUsers(response.data.items)
                 })
-            // props.setUsers(
-            //     [
-            //         {
-            //             id: 1, photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
-            //             followed: false, fullName: "Pavel", status: "I am boss", location: {city: "Minsk", country: "Belarus"}
-            //         },
-            //         {
-            //             id: 2, photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
-            //             followed: true, fullName: "Sasha", status: "I am boss too", location: {city: "New-York", country: "USA"}
-            //         },
-            //         {
-            //             id: 3,
-            //             photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
-            //             followed: false,
-            //             fullName: "Andrew",
-            //             status: "I am boss too too)",
-            //             location: {city: "Kiev", country: "Ukrain"}
-            //         }
-            //     ]
-            // )
+
         }
-    }
+
+
+
+render() {
     return (
         <div>
-            <button onClick={getUsers}> get Users</button>
-            {props.items.map((user) => {
+            {/*<button onClick={this.getUsers}> get Users</button>*/}
+            {this.props.items.map((user:OneUserType) => {
 
                 return <div key={user.id}>
           <span>
@@ -63,13 +51,13 @@ export const Users = (props: PropsType) => {
             <div>
               {user.followed ?
                   <button onClick={() => {
-                      props.unFollow(user.id)
+                      this.props.unFollow(user.id)
                   }}>UnFollow</button>
                   : <button onClick={() => {
-                      props.follow(user.id)
+                      this.props.follow(user.id)
                   }}>Follow</button>
               }
-              
+
             </div>
           </span>
                     <span>
@@ -90,4 +78,5 @@ export const Users = (props: PropsType) => {
             })}
         </div>
     );
-};
+}
+}
