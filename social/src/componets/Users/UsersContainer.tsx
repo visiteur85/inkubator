@@ -1,16 +1,22 @@
 import {connect} from "react-redux";
-import React from "react";
+// import React from "react";
 import {Users} from "./Users";
 import {RootReducerType} from "../../Redux/redux-store";
 import {followAC, OneUserType, setUserAC, unfollowAC} from "../../Redux/users-reducer";
 import {Dispatch} from "redux";
 
 type MapStateToPropsType = {
-    items: Array<OneUserType>;
+    items: Array<OneUserType>
+    pageSize:number
+    totalCount:number
+    currentPage:number
 };
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
-        items: state.usersPage.items
+        items: state.usersPage.items,
+        pageSize: state.usersPage.pageSize,
+        totalCount:state.usersPage.totalCount,
+        currentPage:state.usersPage.currentPage
     };
 };
 

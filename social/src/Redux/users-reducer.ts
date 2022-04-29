@@ -1,16 +1,19 @@
-import { Post } from '../componets/Profile/My posts/Post/Post';
+import {Post} from '../componets/Profile/My posts/Post/Post';
 import React from 'react';
 
 export type UsersPageType =
     {
         items: Array<OneUserType>
+        totalCount: number
+        pageSize: number
+        currentPage: number
 
     }
 
 export type OneUserType = {
     name: string
     id: number
-    uniqueUrlName:string | null
+    uniqueUrlName: string | null
     photos: photosType
     status: string | null
     followed: boolean
@@ -40,51 +43,44 @@ export type setUserACType = {
 };
 
 let initialState: UsersPageType = {
-    items:
-        [
-        // {
-        //     id: 1, photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
-        //     followed: false, fullName: "Pavel", status: "I am boss", location: { city: "Minsk", country: "Belarus" }
-        // },
-        // {
-        //     id: 2, photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
-        //     followed: true, fullName: "Sasha", status: "I am boss too", location: { city: "New-York", country: "USA" }
-        // },
-        // {
-        //     id: 3, photoURl: "https://ktonanovenkogo.ru/image/chelovek.jpg",
-        //     followed: false, fullName: "Andrew", status: "I am boss too too)", location: { city: "Kiev", country: "Ukrain" }
-        // }
-    ]
-}
+    items: [],
+    pageSize: 5,
+    totalCount: 19,
 
+    currentPage: 4
+}
 
 
 export const usersReducer = (state = initialState, action: UsersActionsType) => {
     switch (action.type) {
 
         case "FOLLOW": {
-        
+
             // console.log(action.userId)
 
-            let newState = { ...state, items: state.items.map(user => user.id === action.userId ?
-                    { ...user, followed: true } : user) }
+            let newState = {
+                ...state, items: state.items.map(user => user.id === action.userId ?
+                    {...user, followed: true} : user)
+            }
             // console.log(newState)
             return newState
         }
         case "UNFOLLOW": {
             // console.log(action.userId)
-            let newState = { ...state, items: state.items.map(user => user.id === action.userId ?
-                    { ...user, followed: false } : user) }
+            let newState = {
+                ...state, items: state.items.map(user => user.id === action.userId ?
+                    {...user, followed: false} : user)
+            }
             return newState
         }
         case "SET-USERS": {
-            let newState = { ...state, items: action.items }
+            let newState = {...state, items: action.items}
             return newState
         }
-        default: return state
+        default:
+            return state
     }
 };
-
 
 
 export const followAC = (userId: number): FollowType => {

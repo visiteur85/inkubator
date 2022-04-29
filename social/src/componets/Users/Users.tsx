@@ -9,13 +9,16 @@ type PropsType = {
     follow: (userId: number) => void
     unFollow: (userId: number) => void
     setUsers: (users: Array<OneUserType>) => void
+    pageSize:number
+    totalCount:number
+    currentPage:number
 };
 
 
 export class Users extends React.Component<PropsType> {
 
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users", {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
             headers: {
                 'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
             }
@@ -27,9 +30,24 @@ export class Users extends React.Component<PropsType> {
     }
 
     render() {
+
+        let pagesCount =  Math.ceil( this.props.totalCount / this.props.pageSize);
+
+
+        let pages = [];
+        for (let i = 1; i <= pagesCount; i++ )
+        {
+            pages.push(i);
+        }
+
         return (
             <div>
-                {/*<button onClick={this.getUsers}> get Users</button>*/}
+                <div>
+
+                    {pages.map(page =>  { return  <span className={this.props.currentPage === page ?  s.selectedPage : ""}>{page}</span>})}
+
+                </div>
+
                 {this.props.items.map((user: OneUserType) => {
 
                     return <div key={user.id}>
