@@ -9,9 +9,12 @@ type PropsType = {
     follow: (userId: number) => void
     unFollow: (userId: number) => void
     setUsers: (users: Array<OneUserType>) => void
-    pageSize:number
-    totalCount:number
-    currentPage:number
+    setCurrentPage: (currentPage: number) => void
+    setTotalUsersCount:(totalCount:number)=>void
+
+    pageSize: number
+    totalCount: number
+    currentPage: number
 };
 
 
@@ -24,19 +27,30 @@ export class Users extends React.Component<PropsType> {
             }
         })
             .then(response => {
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(response.data.items);
+                this.props.setTotalUsersCount(response.data.totalCount);
             })
 
+    }
+    onChangedPage = (page:number)=> {
+        this.props.setCurrentPage(page)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
+            headers: {
+                'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
+            }
+        }).then(response => {
+            this.props.setUsers(response.data.items);
+            // this.props.setTotalUsersCount(response.data.totalCount);
+        })
     }
 
     render() {
 
-        let pagesCount =  Math.ceil( this.props.totalCount / this.props.pageSize);
+        let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize);
 
 
         let pages = [];
-        for (let i = 1; i <= pagesCount; i++ )
-        {
+        for (let i = 1; i <= pagesCount; i++) {
             pages.push(i);
         }
 
@@ -44,7 +58,13 @@ export class Users extends React.Component<PropsType> {
             <div>
                 <div>
 
-                    {pages.map(page =>  { return  <span className={this.props.currentPage === page ?  s.selectedPage : ""}>{page}</span>})}
+                    {pages.map(page => {
+                        return <span className={this.props.currentPage === page ? s.selectedPage : ""}
+                                     onClick={() => {
+                                         this.onChangedPage(page)
+                                     }
+                                     }>{page}</span>
+                    })}
 
                 </div>
 

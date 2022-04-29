@@ -24,7 +24,7 @@ export type photosType = {
     large: string | null
 };
 
-export type UsersActionsType = FollowType | UnFollowType | setUserACType;
+export type UsersActionsType = FollowType | UnFollowType | setUserACType | setCurrentPageACType | setTotalUsersCountACType;
 
 export type FollowType = {
     type: "FOLLOW"
@@ -42,12 +42,26 @@ export type setUserACType = {
 
 };
 
+export type setCurrentPageACType = {
+    type: "SET-Current-PAGE"
+    currentPage:number
+
+}
+
+export type setTotalUsersCountACType = {
+    type: "SET-TOTAL -USERS-COUNT"
+    totalCount:number
+
+}
+
+
+
 let initialState: UsersPageType = {
     items: [],
-    pageSize: 5,
-    totalCount: 19,
+    pageSize: 100,
+    totalCount: 0,
 
-    currentPage: 4
+    currentPage: 1
 }
 
 
@@ -77,6 +91,18 @@ export const usersReducer = (state = initialState, action: UsersActionsType) => 
             let newState = {...state, items: action.items}
             return newState
         }
+
+        case "SET-Current-PAGE": {
+            let newState = {...state, currentPage: action.currentPage}
+            return newState
+        }
+
+        case "SET-TOTAL -USERS-COUNT": {
+            let newState = {...state, totalCount: action.totalCount}
+            return newState
+        }
+
+
         default:
             return state
     }
@@ -102,6 +128,22 @@ export let setUserAC = (items: Array<OneUserType>): setUserACType => {
     return {
         type: "SET-USERS",
         items: items
+
+    } as const
+};
+
+export let setCurrentPageAC = (currentPage: number): setCurrentPageACType => {
+    return {
+        type: "SET-Current-PAGE",
+        currentPage
+
+    } as const
+};
+
+export let setTotalUsersCountAC = (totalCount: number): setTotalUsersCountACType => {
+    return {
+        type: "SET-TOTAL -USERS-COUNT",
+        totalCount
 
     } as const
 };
