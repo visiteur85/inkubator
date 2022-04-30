@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 // import React from "react";
-import {Users} from "./Users";
+
 import {RootReducerType} from "../../Redux/redux-store";
 import {
     followAC,
@@ -11,19 +11,81 @@ import {
     unfollowAC
 } from "../../Redux/users-reducer";
 import {Dispatch} from "redux";
+import React from "react";
+import axios from "axios";
+import {Users} from "./Users";
+
+type PropsType = {
+    items: Array<OneUserType>
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
+    setUsers: (users: Array<OneUserType>) => void
+    setCurrentPage: (currentPage: number) => void
+    setTotalUsersCount: (totalCount: number) => void
+
+    pageSize: number
+    totalCount: number
+    currentPage: number
+};
+
+export class UsersApiComponent extends React.Component<PropsType> {
+
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+            {
+                headers: {
+                    'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
+                }
+            })
+            .then(response => {
+                this.props.setUsers(response.data.items);
+                this.props.setTotalUsersCount(response.data.totalCount);
+            })
+
+    }
+
+    onChangedPage = (page: number) => {
+        this.props.setCurrentPage(page)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
+            headers: {
+                'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
+            }
+        }).then(response => {
+            this.props.setUsers(response.data.items);
+            // this.props.setTotalUsersCount(response.data.totalCount);
+        })
+    }
+
+    render() {
+        return <Users
+            totalCount={this.props.totalCount}
+            pageSize={this.props.pageSize}
+            currentPage={this.props.currentPage}
+            onChangedPage={this.onChangedPage}
+            items={this.props.items}
+            follow={this.props.follow}
+            unFollow={this.props.unFollow}
+
+
+        />
+
+
+    }
+};
+
 
 type MapStateToPropsType = {
     items: Array<OneUserType>
-    pageSize:number
-    totalCount:number
-    currentPage:number
+    pageSize: number
+    totalCount: number
+    currentPage: number
 };
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
         items: state.usersPage.items,
         pageSize: state.usersPage.pageSize,
-        totalCount:state.usersPage.totalCount,
-        currentPage:state.usersPage.currentPage
+        totalCount: state.usersPage.totalCount,
+        currentPage: state.usersPage.currentPage
     };
 };
 
@@ -31,8 +93,8 @@ export type MapDispatchToPropsType = {
     follow: (userId: number) => void
     unFollow: (userId: number) => void
     setUsers: (items: Array<OneUserType>) => void
-    setCurrentPage:(currentPage:number)=>void
-    setTotalUsersCount:(totalCount:number)=>void
+    setCurrentPage: (currentPage: number) => void
+    setTotalUsersCount: (totalCount: number) => void
 };
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
@@ -45,10 +107,10 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         setUsers: (users: Array<OneUserType>) => {
             dispatch(setUserAC(users))
         },
-        setCurrentPage:(currentPage:number) => {
+        setCurrentPage: (currentPage: number) => {
             dispatch(setCurrentPageAC(currentPage))
         },
-        setTotalUsersCount:(totalCount:number) => {
+        setTotalUsersCount: (totalCount: number) => {
             dispatch(setTotalUsersCountAC(totalCount))
         }
 
@@ -58,4 +120,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
 export const UsersContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Users);
+)(UsersApiComponent);
