@@ -1,4 +1,4 @@
-import {Post} from '../componets/Profile/My posts/Post/Post';
+
 import React from 'react';
 
 export type UsersPageType =
@@ -7,6 +7,7 @@ export type UsersPageType =
         totalCount: number
         pageSize: number
         currentPage: number
+        isFetching:boolean
 
     }
 
@@ -24,13 +25,13 @@ export type photosType = {
     large: string | null
 };
 
-export type UsersActionsType = FollowType | UnFollowType | setUserACType | setCurrentPageACType | setTotalUsersCountACType;
+export type UsersActionsType = FollowType | UnFollowType | setUserACType |
+    setCurrentPageACType | setTotalUsersCountACType | setIsFetchingACType;
 
 export type FollowType = {
     type: "FOLLOW"
     userId: number
 };
-
 export type UnFollowType = {
     type: "UNFOLLOW"
     userId: number
@@ -41,18 +42,25 @@ export type setUserACType = {
     items: Array<OneUserType>
 
 };
-
 export type setCurrentPageACType = {
     type: "SET-Current-PAGE"
     currentPage:number
 
-}
+};
 
 export type setTotalUsersCountACType = {
     type: "SET-TOTAL -USERS-COUNT"
     totalCount:number
 
-}
+};
+
+export type setIsFetchingACType = {
+    type: "TOGGLE_IS_FETCHING"
+    isFetching:boolean
+
+};
+
+
 
 
 
@@ -60,8 +68,8 @@ let initialState: UsersPageType = {
     items: [],
     pageSize: 100,
     totalCount: 0,
-
-    currentPage: 1
+    currentPage: 1,
+    isFetching: true
 }
 
 
@@ -69,19 +77,14 @@ export const usersReducer = (state = initialState, action: UsersActionsType) => 
     switch (action.type) {
 
         case "FOLLOW": {
-
-            // console.log(action.userId)
-
-            let newState = {
+                     let newState = {
                 ...state, items: state.items.map(user => user.id === action.userId ?
                     {...user, followed: true} : user)
             }
-            // console.log(newState)
-            return newState
+                     return newState
         }
         case "UNFOLLOW": {
-            // console.log(action.userId)
-            let newState = {
+                      let newState = {
                 ...state, items: state.items.map(user => user.id === action.userId ?
                     {...user, followed: false} : user)
             }
@@ -91,18 +94,18 @@ export const usersReducer = (state = initialState, action: UsersActionsType) => 
             let newState = {...state, items: action.items}
             return newState
         }
-
         case "SET-Current-PAGE": {
             let newState = {...state, currentPage: action.currentPage}
             return newState
         }
-
         case "SET-TOTAL -USERS-COUNT": {
             let newState = {...state, totalCount: action.totalCount}
             return newState
         }
-
-
+        case "TOGGLE_IS_FETCHING": {
+            let newState = {...state, isFetching: action.isFetching};
+            return newState
+        }
         default:
             return state
     }
@@ -144,6 +147,14 @@ export let setTotalUsersCountAC = (totalCount: number): setTotalUsersCountACType
     return {
         type: "SET-TOTAL -USERS-COUNT",
         totalCount
+
+    } as const
+};
+
+export let setIsFetchingAC = (isFetching: boolean): setIsFetchingACType => {
+    return {
+        type: "TOGGLE_IS_FETCHING",
+        isFetching
 
     } as const
 };
