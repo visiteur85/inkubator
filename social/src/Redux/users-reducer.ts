@@ -112,14 +112,14 @@ export const usersReducer = (state = initialState, action: UsersActionsType) => 
 };
 
 
-export const followAC = (userId: number): FollowType => {
+export const follow = (userId: number): FollowType => {
     return {
         type: "FOLLOW",
         userId: userId
     } as const
 };
 
-export let unfollowAC = (userId: number): UnFollowType => {
+export let unFollow = (userId: number): UnFollowType => {
     return {
         type: "UNFOLLOW",
         userId: userId
@@ -127,7 +127,7 @@ export let unfollowAC = (userId: number): UnFollowType => {
     } as const
 };
 
-export let setUserAC = (items: Array<OneUserType>): setUserACType => {
+export let setUsers = (items: Array<OneUserType>): setUserACType => {
     return {
         type: "SET-USERS",
         items: items
@@ -135,7 +135,7 @@ export let setUserAC = (items: Array<OneUserType>): setUserACType => {
     } as const
 };
 
-export let setCurrentPageAC = (currentPage: number): setCurrentPageACType => {
+export let setCurrentPage = (currentPage: number): setCurrentPageACType => {
     return {
         type: "SET-Current-PAGE",
         currentPage
@@ -143,7 +143,7 @@ export let setCurrentPageAC = (currentPage: number): setCurrentPageACType => {
     } as const
 };
 
-export let setTotalUsersCountAC = (totalCount: number): setTotalUsersCountACType => {
+export let setTotalUsersCount = (totalCount: number): setTotalUsersCountACType => {
     return {
         type: "SET-TOTAL -USERS-COUNT",
         totalCount
@@ -151,7 +151,7 @@ export let setTotalUsersCountAC = (totalCount: number): setTotalUsersCountACType
     } as const
 };
 
-export let setIsFetchingAC = (isFetching: boolean): setIsFetchingACType => {
+export let setIsFetching = (isFetching: boolean): setIsFetchingACType => {
     return {
         type: "TOGGLE_IS_FETCHING",
         isFetching
