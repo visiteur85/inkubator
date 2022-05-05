@@ -9,13 +9,13 @@ import {} from "../../App";
 import { MyPostsContainer } from "./My posts/MyPostsContainer";
 
 type PropsType = {
-  
+    profile:any
 };
 
 export const Profile = (props: PropsType) => {
   return (
     <div>
-      <ProfileInfo />
+      <ProfileInfo profile={props.profile} />
       <MyPostsContainer />
     </div>
   );

@@ -5,6 +5,7 @@ import React from 'react';
 export type ProfilePageType = {
     posts: Array<PostPropsType>
     newPostText: string
+    profile: any
 };
 export type PostPropsType = {
     id: number
@@ -19,7 +20,8 @@ let initialState:  ProfilePageType = {
         {id: 3, message: "I m ok", likesCount: 14},
         {id: 4, message: "Great", likesCount: 43},
     ],
-    newPostText: ""
+    newPostText: "",
+    profile: null
 }
 
 export const profileReducer = (state = initialState, action:ProfileActionsType )=> {
@@ -40,13 +42,17 @@ switch(action.type){
         
         newState.newPostText = action.newText;
         return newState;}
-        
-
+    case "Set_USER_PROFILE": {
+        let newState = {...state, profile: action.profile}
+        return newState
     }
+
+
+}
 return state
 }
 
-export type ProfileActionsType = AddPostActionType | UpdateNewPostTextActionType
+export type ProfileActionsType = AddPostActionType | UpdateNewPostTextActionType | SetUserProfileType
 
 export type AddPostActionType = {
     type: "ADD-POST"
