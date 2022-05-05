@@ -31,8 +31,7 @@ switch(action.type){
         newState.posts.push(newPost);
         newState.newPostText = "";
 
-        // state.posts.push(newPost);
-        // state.newPostText = "";
+
         return newState
     }
     case "UPDATE-NEW-POST": {
@@ -59,6 +58,14 @@ export type UpdateNewPostTextActionType = {
 
 };
 
+export type SetUserProfileType = {
+    type: "Set_USER_PROFILE"
+    profile: any
+
+};
+
+
+
 export const addPost = ():AddPostActionType=> {
     return {
         type: "ADD-POST"
@@ -71,6 +78,13 @@ export let updateNewPostText = (text:string):UpdateNewPostTextActionType => {
         newText:text
     }as const
 };
+
+export let setUserProfile = (profile:any):SetUserProfileType => {
+    return {type:"Set_USER_PROFILE",
+        profile
+
+    }
+}
 
 
 

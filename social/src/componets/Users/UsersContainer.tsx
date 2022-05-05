@@ -10,11 +10,11 @@ import {
     setUsers,
     unFollow
 } from "../../Redux/users-reducer";
-import {Dispatch} from "redux";
+
 import React from "react";
 import axios from "axios";
 import {Users} from "./Users";
-import preloader from "../../images/Spinner-1s-200px.gif"
+
 import {Preloader} from "../common/preloader/Preloader";
 
 type PropsType = {
