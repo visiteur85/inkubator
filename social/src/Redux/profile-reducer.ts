@@ -5,13 +5,38 @@ import React from 'react';
 export type ProfilePageType = {
     posts: Array<PostPropsType>
     newPostText: string
-    profile: any
+    profile: ProfileFromServerType | null
 };
 export type PostPropsType = {
     id: number
     message: string
     likesCount: number
 };
+
+export type ProfileFromServerType = {
+    aboutMe:string
+    contacts: ContactsForProfileType
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId:number
+    photos: PhotosForProfileType
+
+};
+export type ContactsForProfileType = {
+    facebook:string
+    website:	null | string
+    vk: string
+    twitter:string
+    instagram: string
+    youtube:	null | string
+    github:	string
+    mainLink:	null | string
+};
+export type PhotosForProfileType = {
+    small: string
+    large:string
+}
 
 let initialState:  ProfilePageType = {
     posts: [
@@ -21,7 +46,7 @@ let initialState:  ProfilePageType = {
         {id: 4, message: "Great", likesCount: 43},
     ],
     newPostText: "",
-    profile: null
+    profile:  null
 }
 
 export const profileReducer = (state = initialState, action:ProfileActionsType )=> {

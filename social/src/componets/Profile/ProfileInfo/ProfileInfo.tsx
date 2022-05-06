@@ -1,10 +1,11 @@
 import React from 'react';
 import s from "./profileinfo.module.css"
 import {Preloader} from "../../common/preloader/Preloader";
+import {ProfileFromServerType} from "../../../Redux/profile-reducer";
 
 
 type PropsType = {
-    profile:any
+    profile:ProfileFromServerType | null
 }
 
 export const ProfileInfo = (props:PropsType) => {

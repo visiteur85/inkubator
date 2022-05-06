@@ -7,9 +7,10 @@ import {} from "../../App";
 
 
 import { MyPostsContainer } from "./My posts/MyPostsContainer";
+import {ProfileFromServerType} from "../../Redux/profile-reducer";
 
 type PropsType = {
-    profile:any
+    profile:ProfileFromServerType | null
 };
 
 export const Profile = (props: PropsType) => {
