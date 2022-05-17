@@ -21,3 +21,5 @@ export const Profile = (props: PropsType) => {
     </div>
   );
 };
+
+
