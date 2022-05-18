@@ -21,14 +21,16 @@ type CommonPropsType = RouteComponentProps<PathParamsType> & PropsType
 
 
 type PropsType = {
-    setUserProfile:(profile: ProfileFromServerType | null)=>void
-    profile:ProfileFromServerType | null
+    setUserProfile: (profile: ProfileFromServerType | null) => void
+    profile: ProfileFromServerType | null
 };
 
- export  class ProfileAPIContainer extends React.Component<CommonPropsType> {
+export class ProfileAPIContainer extends React.Component<CommonPropsType> {
     componentDidMount() {
-let userId = this.props.match.params.userId;
-if (!userId) {userId = 2 }
+        let userId = this.props.match.params.userId;
+        if (!userId) {
+            userId = 2
+        }
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`,
             {
                 headers: {
@@ -43,24 +45,25 @@ if (!userId) {userId = 2 }
 
     render() {
         return (
-          <Profile profile={this.props.profile}
-              //{...this.props}
-          />
+            <Profile profile={this.props.profile}
+                //{...this.props}
+            />
         );
-    }};
+    }
+};
 
 type MapStateToPropsType = {
     profile: ProfileFromServerType | null
 
 };
 
- let mapStateToProps = (state: RootReducerType):MapStateToPropsType => {
-     return {
-         profile:state.profilePage.profile
-     }
- }
+let mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
+    return {
+        profile: state.profilePage.profile
+    }
+}
 
 
 let WithUrlDataContainer = withRouter(ProfileAPIContainer);
 
- export const ProfileContainer =   connect (mapStateToProps, {setUserProfile}) (WithUrlDataContainer)
+export const ProfileContainer = connect(mapStateToProps, {setUserProfile})(WithUrlDataContainer)

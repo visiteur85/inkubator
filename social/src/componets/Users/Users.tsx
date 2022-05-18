@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./users.module.css";
 import {OneUserType} from "../../Redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type PropsType = {
     totalCount: number
@@ -53,10 +54,32 @@ export const Users = (props: PropsType) => {
             <div>
               {user.followed ?
                   <button onClick={() => {
-                      props.unFollow(user.id)
+                      axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,  {
+                          headers: {
+                              'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
+                          },
+                          withCredentials: true
+                      })
+                          .then(response => {
+                              if (response.data.resultCode === 0)
+                              {  props.unFollow(user.id)}
+                          })
+
+
                   }}>UnFollow</button>
                   : <button onClick={() => {
-                      props.follow(user.id)
+                      axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
+                          headers: {
+                              'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
+                          },
+                          withCredentials: true
+                      })
+                          .then(response => {
+                              if (response.data.resultCode === 0) {
+                                  props.follow(user.id)
+                              }
+                          })
+
                   }}>Follow</button>
               }
 

@@ -4,7 +4,7 @@ import React from 'react';
 export type AuthFromServerType = {
     data: dataAuthType
     resultCode: number
-    messages:string[]
+    messages: string[]
 
 };
 export type dataAuthType = {
@@ -22,13 +22,11 @@ export type AuthInitialStateType = {
 }
 
 
-
-
 let initialState: AuthInitialStateType = {
-        id: null,
-      email:null,
-      login:null,
-    isFetching:false,
+    id: null,
+    email: null,
+    login: null,
+    isFetching: false,
     isAuth: false
 
 }
