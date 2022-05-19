@@ -12,10 +12,12 @@ import {
 } from "../../Redux/users-reducer";
 
 import React from "react";
-import axios from "axios";
+
 import {Users} from "./Users";
 
 import {Preloader} from "../common/preloader/Preloader";
+import {userApi} from "../../API/api";
+
 
 type PropsType = {
     items: Array<OneUserType>
@@ -36,17 +38,11 @@ export class UsersApiComponent extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.setIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-            {
-                headers: {
-                    'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
-                },
-                withCredentials: true
-            })
-            .then(response => {
+        userApi.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
                 this.props.setIsFetching(false)
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
+                this.props.setUsers(data.items);
+                this.props.setTotalUsersCount(data.totalCount);
             })
 
     }
@@ -54,16 +50,12 @@ export class UsersApiComponent extends React.Component<PropsType> {
     onChangedPage = (page: number) => {
         this.props.setCurrentPage(page)
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
-            headers: {
-                'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
-            },
-            withCredentials: true
-        }).then(response => {
-            this.props.setIsFetching(false)
-            this.props.setUsers(response.data.items);
-            // this.props.setTotalUsersCount(response.data.totalCount);
-        })
+        userApi.getUsers(page, this.props.pageSize)
+            .then(data => {
+                this.props.setIsFetching(false)
+                this.props.setUsers(data.items);
+                // this.props.setTotalUsersCount(response.data.totalCount);
+            })
     }
 
     render() {
