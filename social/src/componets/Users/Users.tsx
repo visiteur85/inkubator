@@ -12,6 +12,8 @@ type PropsType = {
     items: Array<OneUserType>
     follow: (userId: number) => void
     unFollow: (userId: number) => void
+    toggleFollowingProgress:(isFetching: boolean,userId:number)=>void
+    followingInProgress:number[]
 }
 
 
@@ -53,7 +55,8 @@ export const Users = (props: PropsType) => {
             </div>
             <div>
               {user.followed ?
-                  <button onClick={() => {
+                  <button disabled={props.followingInProgress.some(id=> id=== user.id)} onClick={() => {
+                      props.toggleFollowingProgress(true,user.id)
                       axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,  {
                           headers: {
                               'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
@@ -63,11 +66,13 @@ export const Users = (props: PropsType) => {
                           .then(response => {
                               if (response.data.resultCode === 0)
                               {  props.unFollow(user.id)}
+                              props.toggleFollowingProgress(false,user.id)
                           })
 
 
                   }}>UnFollow</button>
-                  : <button onClick={() => {
+                  : <button disabled={props.followingInProgress.some(id=> id=== user.id)} onClick={() => {
+                      props.toggleFollowingProgress(true, user.id)
                       axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
                           headers: {
                               'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
@@ -78,6 +83,7 @@ export const Users = (props: PropsType) => {
                               if (response.data.resultCode === 0) {
                                   props.follow(user.id)
                               }
+                              props.toggleFollowingProgress(false, user.id)
                           })
 
                   }}>Follow</button>

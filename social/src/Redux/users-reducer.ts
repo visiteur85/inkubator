@@ -8,6 +8,7 @@ export type UsersPageType =
         pageSize: number
         currentPage: number
         isFetching:boolean
+        followingInProgress:number[]
 
     }
 
@@ -26,7 +27,7 @@ export type photosType = {
 };
 
 export type UsersActionsType = FollowType | UnFollowType | setUserACType |
-    setCurrentPageACType | setTotalUsersCountACType | setIsFetchingACType;
+    setCurrentPageACType | setTotalUsersCountACType | setIsFetchingACType | toggleFollowingProgressType;
 
 export type FollowType = {
     type: "FOLLOW"
@@ -60,6 +61,13 @@ export type setIsFetchingACType = {
 
 };
 
+export type toggleFollowingProgressType = {
+    type: "TOGGLE_IS_FOLLOWING_PROGRESS"
+    isFetching:boolean
+    userId:number
+
+};
+
 
 
 
@@ -69,7 +77,8 @@ let initialState: UsersPageType = {
     pageSize: 100,
     totalCount: 0,
     currentPage: 1,
-    isFetching: true
+    isFetching: true,
+    followingInProgress:[]
 }
 
 
@@ -104,6 +113,15 @@ export const usersReducer = (state = initialState, action: UsersActionsType) => 
         }
         case "TOGGLE_IS_FETCHING": {
             let newState = {...state, isFetching: action.isFetching};
+            return newState
+        }
+        case "TOGGLE_IS_FOLLOWING_PROGRESS": {
+            let newState = {...state,
+                followingInProgress: action.isFetching ?
+                    [...state.followingInProgress, action.userId]:
+                    state.followingInProgress.filter(id=>id!=action.userId)
+
+            };
             return newState
         }
         default:
@@ -161,7 +179,14 @@ export let setIsFetching = (isFetching: boolean): setIsFetchingACType => {
 
 
 
+export let toggleFollowingProgress = (isFetching: boolean, userId:number): toggleFollowingProgressType => {
+    return {
+        type: "TOGGLE_IS_FOLLOWING_PROGRESS",
+        isFetching,
+        userId
 
+    } as const
+};
 
 
 

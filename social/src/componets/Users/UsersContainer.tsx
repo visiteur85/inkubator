@@ -7,7 +7,7 @@ import {
     OneUserType,
     setCurrentPage, setIsFetching,
     setTotalUsersCount,
-    setUsers,
+    setUsers, toggleFollowingProgress,
     unFollow
 } from "../../Redux/users-reducer";
 
@@ -27,11 +27,13 @@ type PropsType = {
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalCount: number) => void
     setIsFetching: (isFetching: boolean) => void
+    toggleFollowingProgress:(isFetching: boolean,userId:number)=>void
 
     pageSize: number
     totalCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress:number[]
 };
 
 export class UsersApiComponent extends React.Component<PropsType> {
@@ -71,6 +73,8 @@ export class UsersApiComponent extends React.Component<PropsType> {
                 items={this.props.items}
                 follow={this.props.follow}
                 unFollow={this.props.unFollow}
+                toggleFollowingProgress={this.props.toggleFollowingProgress}
+                followingInProgress={this.props.followingInProgress}
             />
         </>
 
@@ -84,6 +88,7 @@ type MapStateToPropsType = {
     totalCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress:number[]
 };
 
 
@@ -102,7 +107,8 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
         pageSize: state.usersPage.pageSize,
         totalCount: state.usersPage.totalCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress:state.usersPage.followingInProgress
     };
 };
 
@@ -110,6 +116,6 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
 export const UsersContainer = connect(
     mapStateToProps,
     {
-        follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, setIsFetching
+        follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, setIsFetching, toggleFollowingProgress
     }
 )(UsersApiComponent);
