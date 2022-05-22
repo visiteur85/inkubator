@@ -39,6 +39,7 @@ type PropsType = {
 export class UsersApiComponent extends React.Component<PropsType> {
 
     componentDidMount() {
+
         this.props.setIsFetching(true);
         userApi.getUsers(this.props.currentPage, this.props.pageSize)
             .then(data => {
