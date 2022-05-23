@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Dispatch} from 'react';
 import {userApi} from "../API/api";
 import {RootReducerType} from "./redux-store";
 
@@ -183,15 +183,43 @@ export let toggleFollowingProgress = (isFetching: boolean, userId: number): togg
 };
 
 
-export const getUsersThunk = (dispatch:any)=> {
-    dispatch(setIsFetching(true));
-    userApi.getUsers(this.props.currentPage, this.props.pageSize)
-        .then(data => {
-            this.props.setIsFetching(false)
-            this.props.setUsers(data.items);
-            this.props.setTotalUsersCount(data.totalCount);
-        })
-}
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch<any>) => {
+        dispatch(setIsFetching(true));
+        userApi.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(setIsFetching(false))
+                dispatch(setUsers(data.items));
+                dispatch(setTotalUsersCount(data.totalCount));
+            })
+    }
+};
+
+export const followThunkCreator = (userId: number) => {
+    return (dispatch: Dispatch<any>) => {
+        dispatch(toggleFollowingProgress(true, userId))
+        userApi.follow(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(follow(userId))
+                }
+                dispatch(toggleFollowingProgress(false, userId))
+            })
+    }
+};
+
+export const unFollowThunkCreator = (userId: number) => {
+    return (dispatch: Dispatch<any>) => {
+        dispatch(toggleFollowingProgress(true, userId))
+        userApi.unFollow(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(follow(userId))
+                }
+                dispatch(toggleFollowingProgress(false, userId))
+            })
+    }
+};
 
 
 
