@@ -15,7 +15,7 @@ import React from "react";
 import {Users} from "./Users";
 
 import {Preloader} from "../common/preloader/Preloader";
-import {userApi} from "../../API/api";
+
 
 
 type PropsType = {

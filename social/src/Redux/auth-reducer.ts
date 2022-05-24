@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {Dispatch} from 'react';
+import {authApi, userApi} from "../API/api";
+import {setUserProfile} from "./profile-reducer";
 
 
 export type AuthFromServerType = {
@@ -58,7 +60,17 @@ export const setUserData = (id: number, email: string, login: string) => {
 
 
 
-
+export const getMeThunkCreator = () => {
+    return (dispatch: Dispatch<any>) => {
+        authApi.me()
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setUserData(response.data.data.id, response.data.data.email,
+                        response.data.data.login))
+                }
+            })
+    }
+};
 
 
 
