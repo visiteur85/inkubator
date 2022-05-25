@@ -9,7 +9,7 @@ import {RootReducerType} from "../../Redux/redux-store";
 import {getProfileThunkCreator, ProfileFromServerType} from "../../Redux/profile-reducer";
 
 
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 
 
 type PathParamsType = {
@@ -24,6 +24,7 @@ type PropsType = {
 
     profile: ProfileFromServerType | null
     getProfileThunkCreator: (userId: number) => void
+    isAuth:boolean
 };
 
 export class ProfileAPIContainer extends React.Component<CommonPropsType> {
@@ -38,6 +39,7 @@ export class ProfileAPIContainer extends React.Component<CommonPropsType> {
     }
 
     render() {
+        if (!this.props.isAuth ) return <Redirect to={"/login"}/>
         return (
             <Profile profile={this.props.profile}
 
@@ -48,12 +50,14 @@ export class ProfileAPIContainer extends React.Component<CommonPropsType> {
 
 type MapStateToPropsType = {
     profile: ProfileFromServerType | null
+    isAuth:boolean
 
 };
 
 let mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        isAuth:state.auth.isAuth
     }
 }
 

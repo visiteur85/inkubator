@@ -13,6 +13,7 @@ export type MapStateToPropsType = {
     dialogs: Array<DialogPropsType>
     messages: Array<MessagePropsType>
     newMessageBody: string
+    isAuth:boolean
 }
 
 export type MapDispatchToPropsType = {
@@ -25,7 +26,8 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessageBody: state.dialogsPage.newMessageBody
+        newMessageBody: state.dialogsPage.newMessageBody,
+        isAuth:state.auth.isAuth
 
     }
 };

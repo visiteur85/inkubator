@@ -11,6 +11,7 @@ import {ProfileFromServerType} from "../../Redux/profile-reducer";
 
 type PropsType = {
     profile:ProfileFromServerType | null
+    // isAuth:boolean
 };
 
 export const Profile = (props: PropsType) => {
