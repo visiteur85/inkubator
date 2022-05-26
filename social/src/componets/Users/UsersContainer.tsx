@@ -15,6 +15,7 @@ import React from "react";
 import {Users} from "./Users";
 
 import {Preloader} from "../common/preloader/Preloader";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 
 
@@ -105,7 +106,7 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     };
 };
 
-
+let withRedirect = WithAuthRedirect(UsersApiComponent)
 export const UsersContainer = connect(
     mapStateToProps,
     {
@@ -113,4 +114,4 @@ export const UsersContainer = connect(
         toggleFollowingProgress,
         getUsersThunkCreator, followThunkCreator, unFollowThunkCreator
     }
-)(UsersApiComponent);
+)(withRedirect);
