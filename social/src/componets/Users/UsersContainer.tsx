@@ -18,10 +18,9 @@ import {Preloader} from "../common/preloader/Preloader";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 
-
 type PropsType = {
     items: Array<OneUserType>
-        setCurrentPage: (currentPage: number) => void
+    setCurrentPage: (currentPage: number) => void
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
     getUsersThunkCreator: (currentPage: number, pageSize: number) => void
     unFollowThunkCreator: (userId: number) => void
@@ -65,7 +64,7 @@ export class UsersApiComponent extends React.Component<PropsType> {
                 currentPage={this.props.currentPage}
                 onChangedPage={this.onChangedPage}
                 items={this.props.items}
-                                toggleFollowingProgress={this.props.toggleFollowingProgress}
+                toggleFollowingProgress={this.props.toggleFollowingProgress}
                 followingInProgress={this.props.followingInProgress}
                 followThunkCreator={this.props.followThunkCreator}
                 unFollowThunkCreator={this.props.unFollowThunkCreator}
@@ -110,7 +109,7 @@ let withRedirect = WithAuthRedirect(UsersApiComponent)
 export const UsersContainer = connect(
     mapStateToProps,
     {
-                setCurrentPage,
+        setCurrentPage,
         toggleFollowingProgress,
         getUsersThunkCreator, followThunkCreator, unFollowThunkCreator
     }

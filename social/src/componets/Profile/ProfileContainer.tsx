@@ -11,6 +11,7 @@ import {getProfileThunkCreator, ProfileFromServerType} from "../../Redux/profile
 
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 
 type PathParamsType = {
@@ -51,7 +52,6 @@ export class ProfileAPIContainer extends React.Component<CommonPropsType> {
 let AuthRedirectComponent = WithAuthRedirect(ProfileAPIContainer);
 
 
-
 type MapStateToPropsType = {
     profile: ProfileFromServerType | null
 };
@@ -64,6 +64,11 @@ let mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
 }
 
 
-let WithUrlDataContainer = withRouter(AuthRedirectComponent);
+// let WithUrlDataContainer = withRouter(AuthRedirectComponent);
+//
+// // export const ProfileContainer = connect(mapStateToProps, {getProfileThunkCreator})(WithUrlDataContainer)
 
-export const ProfileContainer = connect(mapStateToProps, {getProfileThunkCreator})(WithUrlDataContainer)
+export const ProfileContainer = compose<React.ComponentType>(
+    connect(mapStateToProps, {getProfileThunkCreator}),
+    withRouter,)
+(AuthRedirectComponent)

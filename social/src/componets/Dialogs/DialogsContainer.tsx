@@ -4,7 +4,7 @@ import {NavLink, Redirect} from "react-router-dom";
 
 import {RootReducerType} from "../../Redux/redux-store";
 import {DialogPropsType, sendMessageBody, updateNewMessageBodyAC} from "../../Redux/dialog-reducer";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {Dialogs, MessagePropsType} from "./Dialogs";
 import {connect} from "react-redux";
 import {ProfileAPIContainer} from "../Profile/ProfileContainer";
@@ -45,9 +45,17 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     }
 };
 
-let AuthRedirectComponent = WithAuthRedirect(Dialogs)
+// export   compose(
+//     connect(mapStateToProps, mapDispatchToProps),
+//     WithAuthRedirect)(Dialogs)
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+// let AuthRedirectComponent = WithAuthRedirect(Dialogs)
+//
+// export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+
+export const DialogsContainer = compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithAuthRedirect)(Dialogs)
   
 
 
