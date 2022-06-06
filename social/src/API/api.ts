@@ -1,3 +1,7 @@
+//https://www.youtube.com/watch?v=1faxVHNBnsU&t=334s
+//6:17
+
+
 import axios from "axios";
 import {AuthFromServerType} from "../Redux/auth-reducer";
 
@@ -25,11 +29,24 @@ export const userApi = {
         return instance.delete(`1.0/follow/${userId}`)
     },
     getProfile(userId:number) {
-         return instance.get(`1.0/profile/${userId}`
-            )
+         return profileApi.getProfile(userId)
     },
 
-}
+};
+
+export const profileApi = {
+    getProfile(userId:number) {
+        return instance.get(`1.0/profile/${userId}`
+        )
+    },
+   getStatus(userId:number)  {
+        return instance.get(`1.0/profile/status/${userId}`)
+   },
+    updateStatus(status:string)  {
+        return instance.put(`1.0/profile/${status}`)
+    }
+
+};
 
 export const authApi = {
     me() {
@@ -43,9 +60,7 @@ export const authApi = {
 
     },
 
-
-
-}
+};
 
 
 

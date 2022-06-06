@@ -5,7 +5,6 @@ type PropsType = {
 }
 
 export class ProfileStatus extends React.Component<PropsType> {
-
     state = {
         editMode: false
     }
@@ -14,16 +13,11 @@ export class ProfileStatus extends React.Component<PropsType> {
         this.setState({
             editMode: true
         })
-
-
     }
-
     deactivateEditMode() {
         this.setState({
             editMode: false
         })
-
-
     }
 
     render() {
