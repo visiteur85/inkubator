@@ -1,7 +1,7 @@
-import {Post} from './../componets/Profile/My posts/Post/Post';
-import React, {Dispatch} from 'react';
+
+import  {Dispatch} from 'react';
 import {profileApi, userApi} from "../API/api";
-import {setIsFetching, setTotalUsersCount, setUsers} from "./users-reducer";
+
 
 
 export type ProfilePageType = {
@@ -73,8 +73,8 @@ export const profileReducer = (state = initialState, action: ProfileActionsType)
             return newState;
         }
         case "Set_USER_PROFILE": {
-            let newState = {...state, profile: action.profile}
-            return newState
+            let newState = {...state, profile: action.profile};
+            return newState;
         }
 
         case "SET-STATUS": {

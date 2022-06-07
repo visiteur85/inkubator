@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler, ChangeEvent} from 'react';
+import React, { ChangeEvent} from 'react';
 
 type PropsType = {
     status: any

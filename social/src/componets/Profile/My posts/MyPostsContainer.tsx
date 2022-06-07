@@ -1,6 +1,6 @@
-import React, {LegacyRef} from 'react';
+// import React from 'react';
 
-import {} from "../../../App";
+// import {} from "../../../App";
 
 
 import {addPost, PostPropsType, updateNewPostText} from '../../../Redux/profile-reducer';

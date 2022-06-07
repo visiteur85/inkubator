@@ -1,6 +1,6 @@
 import React from "react";
 
-import {} from "../../App";
+// import {} from "../../App";
 
 import {Profile} from "./Profile";
 
@@ -14,7 +14,7 @@ import {
 } from "../../Redux/profile-reducer";
 
 
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 
@@ -57,7 +57,7 @@ updateStatus={this.props.updateStatusThunkCreator}
             />
         );
     }
-};
+}
 
 let AuthRedirectComponent = WithAuthRedirect(ProfileAPIContainer);
 

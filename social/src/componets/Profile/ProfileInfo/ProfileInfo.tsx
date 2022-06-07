@@ -24,7 +24,7 @@ export const ProfileInfo = (props:PropsType) => {
             {/*        alt="space"/>*/}
             {/*</div>*/}
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.small}/>
+                <img src={props.profile.photos.small} alt={"photo"}/>
               <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
             </div>
         </div>
