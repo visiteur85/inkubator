@@ -1,5 +1,5 @@
 //https://www.youtube.com/watch?v=1faxVHNBnsU&t=334s
-//6:17
+//30-03
 
 
 import axios from "axios";
@@ -43,7 +43,7 @@ export const profileApi = {
         return instance.get(`1.0/profile/status/${userId}`)
    },
     updateStatus(status:string)  {
-        return instance.put(`1.0/profile/${status}`)
+        return instance.put(`1.0/profile/${status}`, {status:status})
     }
 
 };
