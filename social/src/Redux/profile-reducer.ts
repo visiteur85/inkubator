@@ -160,7 +160,7 @@ export const updateStatusThunkCreator = (status: string) => {
         profileApi.updateStatus(status)
             .then(response => {
                 if (response.data.resultCode === 0) {
-                    dispatch(setStatusAC(response.data))
+                    dispatch(setStatusAC(status))
                 }
 
             })

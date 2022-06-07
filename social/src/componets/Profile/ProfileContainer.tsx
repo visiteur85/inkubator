@@ -44,7 +44,8 @@ export class ProfileAPIContainer extends React.Component<CommonPropsType> {
             userId = 2
         }
         this.props.getProfileThunkCreator(userId);
-        this.props.getUserStatusThunkCreator(userId)
+
+        this.props.getUserStatusThunkCreator(userId);
 
     }
 
