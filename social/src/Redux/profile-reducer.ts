@@ -6,7 +6,6 @@ import {profileApi, userApi} from "../API/api";
 
 export type ProfilePageType = {
     posts: Array<PostPropsType>
-    newPostText: string
     profile: ProfileFromServerType | null
     status: string
 };
@@ -48,7 +47,6 @@ let initialState: ProfilePageType = {
         {id: 3, message: "I m ok", likesCount: 14},
         {id: 4, message: "Great", likesCount: 43},
     ],
-    newPostText: "",
     profile: null,
     status: ""
 }
@@ -56,22 +54,16 @@ let initialState: ProfilePageType = {
 export const profileReducer = (state = initialState, action: ProfileActionsType) => {
     switch (action.type) {
         case "ADD-POST": {
-            let newPost: PostPropsType = {id: 5, message: state.newPostText, likesCount: 15};
+            let newPost: PostPropsType = {id: 5, message: action.newPostText, likesCount: 15};
             let newState = {...state};
             newState.posts = [...state.posts];
             newState.posts.push(newPost);
-            newState.newPostText = "";
+            // newState.newPostText = "";
 
 
             return newState
         }
-        case "UPDATE-NEW-POST": {
 
-            let newState = {...state};
-
-            newState.newPostText = action.newText;
-            return newState;
-        }
         case "Set_USER_PROFILE": {
             let newState = {...state, profile: action.profile};
             return newState;
@@ -85,17 +77,13 @@ export const profileReducer = (state = initialState, action: ProfileActionsType)
     return state
 }
 
-export type ProfileActionsType = AddPostActionType | UpdateNewPostTextActionType | SetUserProfileType | SetStatusType
+export type ProfileActionsType = AddPostActionType |  SetUserProfileType | SetStatusType
 
 export type AddPostActionType = {
     type: "ADD-POST"
+    newPostText:string
 };
 
-export type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST"
-    newText: string
-
-};
 
 export type SetUserProfileType = {
     type: "Set_USER_PROFILE"
@@ -104,18 +92,14 @@ export type SetUserProfileType = {
 };
 
 
-export const addPost = (): AddPostActionType => {
+export const addPost = (newPostText:string): AddPostActionType => {
     return {
-        type: "ADD-POST"
+        type: "ADD-POST",
+        newPostText
     } as const
 };
 
-export let updateNewPostText = (text: string): UpdateNewPostTextActionType => {
-    return {
-        type: "UPDATE-NEW-POST",
-        newText: text
-    } as const
-};
+
 
 export let setUserProfile = (profile: any): SetUserProfileType => {
     return {

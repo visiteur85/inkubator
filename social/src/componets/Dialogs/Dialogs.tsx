@@ -18,13 +18,13 @@ export const Dialogs = (props: DialogsPropsType) => {
     ));
 
 
-    const addNewMessage = (value:string) => {
-        props.sendMessageBody(value)
-    };
+    // const addNewMessage = (value:string) => {
+    //     props.sendMessageBody(value)
+    // };
 
 
     const onSubmit = (formData: FormDataMessageType) => {
-        console.log(formData)
+        props.sendMessageBody(formData.newMessageBody)
     }
     // if (!props.isAuth) return <Redirect to={"./login"}/>
     return (
@@ -34,12 +34,11 @@ export const Dialogs = (props: DialogsPropsType) => {
                 <div>{messageElements}</div>
                 <AddMessageFormRedux onSubmit={onSubmit}/>
             </div>
-
         </div>
     );
 };
 type FormDataMessageType = {
-    newMessageBody: any
+    newMessageBody: string
 
 }
 const AddMessageForm: React.FC<InjectedFormProps<FormDataMessageType>> = (props) => {
@@ -48,12 +47,9 @@ const AddMessageForm: React.FC<InjectedFormProps<FormDataMessageType>> = (props)
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field component={"textarea"} name={"newMessageBody"} placeholder={"Введите Ваше сообщение"}/>
-
             </div>
             <div>
-                <button>
-                    Send
-                </button>
+                <button>Send</button>
             </div>
         </form>)
 }
