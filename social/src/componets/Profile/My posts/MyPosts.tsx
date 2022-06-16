@@ -1,13 +1,9 @@
-import React, {LegacyRef} from 'react';
+import React from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {} from "../../../App";
-
-
 import {MyPostsPropsType} from "./MyPostsContainer";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Login} from "../../Login/Login";
-
+import {Field, InjectedFormProps, reduxForm} from "redux-form"
+import {maxLengthCreator, required} from "../../../utils/validators/validators";
 
 
 
@@ -15,6 +11,7 @@ import {Login} from "../../Login/Login";
 export const MyPosts = (props: MyPostsPropsType) => {
 
     const onAddPost = (formData:FormPostDataType) => {
+        console.log(formData.newPostText)
                    props.addPost(formData.newPostText)
 
         }
@@ -36,12 +33,16 @@ type FormPostDataType = {
     newPostText: string
 
 }
-
+let maxLength10 =  maxLengthCreator(10)
 export const AddNewPostForm: React.FC<InjectedFormProps<FormPostDataType>> = (props) => {
+
+
+
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                    <Field component={"textarea"} name={"newPostName"}
+                    <Field component={"textarea"} name={"newPostText"}
+                           validate={[required, maxLength10]}
                        />
             </div>
             <div>

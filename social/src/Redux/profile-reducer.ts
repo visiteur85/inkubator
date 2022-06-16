@@ -54,6 +54,7 @@ let initialState: ProfilePageType = {
 export const profileReducer = (state = initialState, action: ProfileActionsType) => {
     switch (action.type) {
         case "ADD-POST": {
+
             let newPost: PostPropsType = {id: 5, message: action.newPostText, likesCount: 15};
             let newState = {...state};
             newState.posts = [...state.posts];
