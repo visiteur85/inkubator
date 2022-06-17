@@ -1,13 +1,17 @@
 import React from 'react';
+import {WrappedFieldProps} from "redux-form";
+import s from "../FormsControl/FormControls.module.css"
 
-type TextareaPropsType = {
 
-}
+export const Textarea = ({ input, meta, ...restProps}: WrappedFieldProps) => {
 
-export const Textarea = (props:TextareaPropsType) => {
     return (
-        <div>
-            <textarea  {...props}/>
+        <div className={s.formControl + " " + s.error}>
+            <div>
+            <textarea  {...input} {...restProps}/>
+            </div>
+            <span>{"some error"}</span>
             </div>
     )
 }
+

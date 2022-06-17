@@ -7,17 +7,14 @@ import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControl/FormControls";
 
 
-
-
 export const MyPosts = (props: MyPostsPropsType) => {
 
-    const onAddPost = (formData:FormPostDataType) => {
+    const onAddPost = (formData: FormPostDataType) => {
         console.log(formData.newPostText)
-                   props.addPost(formData.newPostText)
+        props.addPost(formData.newPostText)
+    }
 
-        }
-
-      return (
+    return (
         <div className={s.postsBlock}>
             <h3>My Posts</h3>
             <AddNewpostReduxForm onSubmit={onAddPost}/>
@@ -34,20 +31,19 @@ type FormPostDataType = {
     newPostText: string
 
 }
-let maxLength10 =  maxLengthCreator(10)
+let maxLength10 = maxLengthCreator(10)
 export const AddNewPostForm: React.FC<InjectedFormProps<FormPostDataType>> = (props) => {
-
 
 
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                    <Field component={Textarea} name={"newPostText"} placeholder={"Post Message"}
-                           validate={[required, maxLength10]}
-                       />
+                <Field component={Textarea} name={"newPostText"} placeholder={"Post Message"}
+                       validate={[required, maxLength10]}
+                />
             </div>
             <div>
-                <button >Add post</button>
+                <button type={'submit'}>Add post</button>
             </div>
 
         </form>

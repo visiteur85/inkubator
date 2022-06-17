@@ -14,7 +14,6 @@ export let rootReducer = combineReducers({
     usersPage: usersReducer,
     auth: authReducer,
     form: formReducer
-
 })
 export type RootReducerType = ReturnType<typeof rootReducer>
 export type StoreType = typeof store
