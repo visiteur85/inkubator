@@ -3,15 +3,16 @@ import {WrappedFieldProps} from "redux-form";
 import s from "../FormsControl/FormControls.module.css"
 
 
-export const Textarea = ({ input, meta, ...restProps}: WrappedFieldProps) => {
+export const Textarea = ({input, meta, ...restProps}: WrappedFieldProps) => {
 
+    const hasError = meta.touched && meta.error;
     return (
-        <div className={s.formControl + " " + s.error}>
+        <div className={s.formControl + " " + (hasError ? s.error : "")}>
             <div>
-            <textarea  {...input} {...restProps}/>
+                <textarea  {...input} {...restProps}/>
             </div>
-            <span>{"some error"}</span>
-            </div>
+            {hasError && <span>{meta.error}</span>}
+        </div>
     )
 }
 
