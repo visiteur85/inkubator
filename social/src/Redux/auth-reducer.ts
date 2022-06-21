@@ -72,6 +72,17 @@ export const getMeThunkCreator = () => {
     }
 };
 
+export const Login = (email:string, password: string, rememberMe:boolean ) => {
+    return (dispatch: Dispatch<any>) => {
+        authApi.login(email, password, rememberMe)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+
+                }
+            })
+    }
+};
+
 
 
 

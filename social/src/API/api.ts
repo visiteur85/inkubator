@@ -28,29 +28,29 @@ export const userApi = {
 
         return instance.delete(`1.0/follow/${userId}`)
     },
-    getProfile(userId:number) {
-         return profileApi.getProfile(userId)
+    getProfile(userId: number) {
+        return profileApi.getProfile(userId)
     },
 
 };
 
 export const profileApi = {
-    getProfile(userId:number) {
+    getProfile(userId: number) {
         return instance.get(`1.0/profile/${userId}`
         )
     },
-   getStatus(userId:number)  {
+    getStatus(userId: number) {
         return instance.get(`1.0/profile/status/${userId}`)
-   },
-    updateStatus(status:string)  {
-        return instance.put(`1.0/profile/status`, {status:status})
+    },
+    updateStatus(status: string) {
+        return instance.put(`1.0/profile/status`, {status: status})
     }
 
 };
 
 export const authApi = {
     me() {
-         return instance.get<AuthFromServerType>(`1.0/auth/me`,
+        return instance.get<AuthFromServerType>(`1.0/auth/me`,
             {
                 headers: {
                     'API-KEY': '13291219-4788-4555-a4f4-aaeffe0abc09'
@@ -59,6 +59,12 @@ export const authApi = {
             })
 
     },
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post("1.0/auth/login", {email, password, rememberMe})
+    },
+    logout() {
+        return instance.delete("1.0/auth/login");
+    }
 
 };
 
