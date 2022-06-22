@@ -1,6 +1,7 @@
-import React, {Dispatch} from 'react';
+
 import {authApi, userApi} from "../API/api";
-import {setUserProfile} from "./profile-reducer";
+import {Dispatch} from "redux";
+
 
 
 export type AuthFromServerType = {
@@ -51,13 +52,12 @@ export const authReducer = (state = initialState, action: setUserDataType) => {
 
 
 export type setUserDataType = ReturnType<typeof setUserData>
-export const setUserData = (id: number, email: string, login: string) => {
+export const setUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => {
     return {
         type: "SET-USER-DATE",
-        data: {id, email, login}
+        data: {id, email, login, isAuth}
     } as const
 };
-
 
 
 export const getMeThunkCreator = () => {
@@ -66,18 +66,30 @@ export const getMeThunkCreator = () => {
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(setUserData(response.data.data.id, response.data.data.email,
-                        response.data.data.login))
+                        response.data.data.login, true))
                 }
             })
     }
 };
 
-export const Login = (email:string, password: string, rememberMe:boolean ) => {
+export const Login = (email: string, password: string, rememberMe: boolean) => {
     return (dispatch: Dispatch<any>) => {
         authApi.login(email, password, rememberMe)
             .then(response => {
                 if (response.data.resultCode === 0) {
+                    dispatch(getMeThunkCreator())
+                }
+            })
+    }
+};
 
+export const Logout = () => {
+    return (dispatch: Dispatch<any>) => {
+        authApi.logout()
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setUserData(null, null,
+                        null, false))
                 }
             })
     }
