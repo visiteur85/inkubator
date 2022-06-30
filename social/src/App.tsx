@@ -11,7 +11,7 @@ import {Route} from "react-router-dom";
 import {UsersContainer} from "./componets/Users/UsersContainer";
 import {ProfileContainer} from "./componets/Profile/ProfileContainer";
 import {HeaderContainer} from "./componets/Header/HeaderContainer";
-import {Login} from "./componets/Login/Login";
+import {Login, LoginContainer, LoginForm} from "./componets/Login/Login";
 import {DialogsContainer} from "./componets/Dialogs/DialogsContainer";
 
 
@@ -26,7 +26,7 @@ const App = () => {
                 <Route exact path={"/dialogs"} render={() => <DialogsContainer/>}/>
                 <Route exact path={"/profile/:userId?"} render={() => <ProfileContainer/>}/>
                 <Route exact path={"/users"} render={() => <UsersContainer/>}/>
-                <Route exact path={"/login"} render={() => <Login/>}/>
+                <Route exact path={"/login"} render={() => <LoginContainer/>}/>
 
 
                 {/*<Route path={"/news"} element={<News/>}/>*/}

@@ -2,6 +2,11 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/FormsControl/FormControls";
 import {required} from "../../utils/validators/validators";
+import {connect} from "react-redux";
+import {LoginTS} from "../../Redux/auth-reducer";
+import {compose} from "redux";
+import {getProfileThunkCreator, getUserStatusThunkCreator, updateStatusThunkCreator} from "../../Redux/profile-reducer";
+import {withRouter} from "react-router-dom";
 
 type FormDataType = {
     login: string
@@ -42,10 +47,13 @@ const LoginReduxForm = reduxForm<FormDataType>({
     form: "login"
 })(LoginForm)
 
-export const Login = () => {
+export type LoginPropsType = {
+    LoginTS:(email: string, password: string, rememberMe: boolean)=>void
+}
+ export const Login = (props:LoginPropsType) => {
 
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+     props.LoginTS(formData.login, formData.password, formData.rememberMe)
     }
     return (
         <div>
@@ -57,5 +65,9 @@ export const Login = () => {
     );
 };
 
+export default  connect(null, {LoginTS}) (Login)
 
-
+export const LoginContainer = compose<React.ComponentType>(
+    connect(null, {LoginTS}),
+    withRouter,)
+(Login)

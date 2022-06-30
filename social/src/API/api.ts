@@ -59,7 +59,7 @@ export const authApi = {
             })
 
     },
-    login(email: string, password: string, rememberMe: boolean) {
+    login(email: string, password: string, rememberMe: boolean = false) {
         return instance.post("1.0/auth/login", {email, password, rememberMe})
     },
     logout() {
