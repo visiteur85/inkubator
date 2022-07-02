@@ -40,7 +40,7 @@ export const authReducer = (state = initialState, action: setUserDataType) => {
 
         case "SET-USER-DATE": {
             let newState = {
-                ...state, ...action.data, isAuth: true
+                ...state, ...action.data
             }
             return newState
         }

@@ -5,8 +5,9 @@ import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {LoginTS} from "../../Redux/auth-reducer";
 import {compose} from "redux";
-import {getProfileThunkCreator, getUserStatusThunkCreator, updateStatusThunkCreator} from "../../Redux/profile-reducer";
-import {withRouter} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
+import {RootReducerType} from "../../Redux/redux-store";
+import {mapStateToPropsRedirectType} from "../../hoc/WithAuthRedirect";
 
 type FormDataType = {
     login: string
@@ -47,14 +48,23 @@ const LoginReduxForm = reduxForm<FormDataType>({
     form: "login"
 })(LoginForm)
 
+let mapStateToPropsRedirect = (state: RootReducerType): mapStateToPropsRedirectType => ({
+
+    isAuth: state.auth.isAuth
+});
 export type LoginPropsType = {
-    LoginTS:(email: string, password: string, rememberMe: boolean)=>void
+    LoginTS: (email: string, password: string, rememberMe: boolean) => void
+    isAuth: boolean
 }
- export const Login = (props:LoginPropsType) => {
+export const Login = (props: LoginPropsType) => {
 
     const onSubmit = (formData: FormDataType) => {
-     props.LoginTS(formData.login, formData.password, formData.rememberMe)
+        props.LoginTS(formData.login, formData.password, formData.rememberMe)
     }
+    if (props.isAuth) {
+        return <Redirect to={"/profile"}/>
+    }
+
     return (
         <div>
             <h1>LOGIN</h1>
@@ -65,9 +75,10 @@ export type LoginPropsType = {
     );
 };
 
-export default  connect(null, {LoginTS}) (Login)
+// export default  connect(null, {LoginTS}) (Login)
 
 export const LoginContainer = compose<React.ComponentType>(
-    connect(null, {LoginTS}),
+    connect(mapStateToPropsRedirect, {LoginTS}),
     withRouter,)
 (Login)
+

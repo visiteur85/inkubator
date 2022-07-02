@@ -1,13 +1,12 @@
 import React from "react";
-import s from "./Dialogs.module.css";
-import {NavLink, Redirect} from "react-router-dom";
+
 
 import {RootReducerType} from "../../Redux/redux-store";
 import {DialogPropsType, sendMessageBody} from "../../Redux/dialog-reducer";
 import {compose, Dispatch} from "redux";
 import {Dialogs, MessagePropsType} from "./Dialogs";
 import {connect} from "react-redux";
-import {ProfileAPIContainer} from "../Profile/ProfileContainer";
+
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 

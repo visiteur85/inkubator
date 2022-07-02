@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./Dialogs.module.css";
-import {NavLink, Redirect} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 import {DialogsPropsType,} from "./DialogsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";

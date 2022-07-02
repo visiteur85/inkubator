@@ -1,9 +1,8 @@
 import React from 'react';
 import {Header} from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
 import {RootReducerType} from "../../Redux/redux-store";
-import {getMeThunkCreator} from "../../Redux/auth-reducer";
+import {getMeThunkCreator, Logout} from "../../Redux/auth-reducer";
 
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -17,16 +16,17 @@ export class HeaderAPIContainer extends React.Component<PropsType> {
     render() {
         return <Header isAuth={this.props.isAuth}
                        login={this.props.login}
+                       Logout={this.props.Logout}
         />
     }
-};
+}
 
 type MapStateToPropsType = {
     isAuth: boolean
     login: string | null
 };
 type MapDispatchToPropsType = {
-
+    Logout:()=>void
     getMeThunkCreator:()=>void
 }
 
@@ -37,5 +37,5 @@ const mapStateToProps = (state: RootReducerType): MapStateToPropsType => ({
 })
 
 
-export const HeaderContainer = connect<MapStateToPropsType, MapDispatchToPropsType, unknown, RootReducerType>(mapStateToProps, {getMeThunkCreator})(HeaderAPIContainer);
+export const HeaderContainer = connect<MapStateToPropsType, MapDispatchToPropsType, unknown, RootReducerType>(mapStateToProps, {getMeThunkCreator, Logout})(HeaderAPIContainer);
 
