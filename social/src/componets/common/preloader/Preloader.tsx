@@ -2,12 +2,9 @@ import React from 'react';
 
 import {LinearProgress} from "@mui/material";
 
-type PropsType = {
 
-}
-export const Preloader = (props:PropsType) => {
+export const Preloader = () => {
     return (
-
-    <LinearProgress color="secondary" />
+        <LinearProgress color="secondary"/>
     );
 };

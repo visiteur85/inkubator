@@ -8,5 +8,11 @@
     color: red;
 }
 
-.error {
+.formSummeryError {
+    border: red 1px solid;
+    padding: 5px;
+    max-width: 150px;
+    color: red;
+    text-align: center;
+
 }

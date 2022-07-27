@@ -1,6 +1,7 @@
 
 import {authApi, userApi} from "../API/api";
 import {Dispatch} from "redux";
+import {stopSubmit} from "redux-form";
 
 
 
@@ -74,10 +75,16 @@ export const getMeThunkCreator = () => {
 
 export const LoginTS = (email: string, password: string, rememberMe: boolean) => {
     return (dispatch: Dispatch<any>) => {
+        let action = stopSubmit("login", {_error: "Common Error"});
+        dispatch(action)
+        return
         authApi.login(email, password, rememberMe)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(getMeThunkCreator())
+                }
+                else {
+
                 }
             })
     }
