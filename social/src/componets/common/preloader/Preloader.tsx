@@ -1,11 +1,13 @@
 import React from 'react';
-import preloader from "../../../images/Spinner-1s-200px.gif";
+
+import {LinearProgress} from "@mui/material";
 
 type PropsType = {
 
 }
 export const Preloader = (props:PropsType) => {
     return (
-        <img src={preloader}/>
+
+    <LinearProgress color="secondary" />
     );
 };
