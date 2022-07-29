@@ -13,29 +13,42 @@ import {ProfileContainer} from "./componets/Profile/ProfileContainer";
 import {HeaderContainer} from "./componets/Header/HeaderContainer";
 import {Login, LoginContainer, LoginForm} from "./componets/Login/Login";
 import {DialogsContainer} from "./componets/Dialogs/DialogsContainer";
+import {connect} from "react-redux";
+import {getMeThunkCreator} from "./Redux/auth-reducer";
+import {compose} from "redux";
+
+type PropsType =  MapDispatchToPropsType
+class App extends React.Component<PropsType> {
+
+    componentDidMount() {
+        this.props.getMeThunkCreator()
+    }
+    render() {
+        return (
+            <div className="app-wrapper">
+                <HeaderContainer/>
+                <Navbar/>
+                <div className="app-wrapper-content">
 
 
-const App = () => {
-    return (
-        <div className="app-wrapper">
-            <HeaderContainer/>
-            <Navbar/>
-            <div className="app-wrapper-content">
+                    <Route exact path={"/dialogs"} render={() => <DialogsContainer/>}/>
+                    <Route exact path={"/profile/:userId?"} render={() => <ProfileContainer/>}/>
+                    <Route exact path={"/users"} render={() => <UsersContainer/>}/>
+                    <Route exact path={"/login"} render={() => <LoginContainer/>}/>
 
 
-                <Route exact path={"/dialogs"} render={() => <DialogsContainer/>}/>
-                <Route exact path={"/profile/:userId?"} render={() => <ProfileContainer/>}/>
-                <Route exact path={"/users"} render={() => <UsersContainer/>}/>
-                <Route exact path={"/login"} render={() => <LoginContainer/>}/>
+                    {/*<Route path={"/news"} element={<News/>}/>*/}
+                    {/*<Route path={"/music"} element={<Music/>}/>*/}
+                    {/*<Route path={"/settings"} element={<Settings/>}/>*/}
 
-
-                {/*<Route path={"/news"} element={<News/>}/>*/}
-                {/*<Route path={"/music"} element={<Music/>}/>*/}
-                {/*<Route path={"/settings"} element={<Settings/>}/>*/}
-
+                </div>
             </div>
-        </div>
-    );
-};
+        );
+    }
+}
 
-export default App;
+type MapDispatchToPropsType = {
+    getMeThunkCreator:()=>void
+}
+
+export default compose( connect(null, {getMeThunkCreator}))(App);
