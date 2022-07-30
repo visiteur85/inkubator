@@ -60,15 +60,18 @@ export const setUserData = (id: number | null, email: string | null, login: stri
 
 
 export const getMeThunkCreator = () => {
-    return (dispatch: Dispatch<any>) => {
-        authApi.me()
+    return (dispatch: Dispatch<setUserDataType>)  => {
+
+           return authApi.me()
             .then(response => {
+
                 if (response.data.resultCode === 0) {
                     dispatch(setUserData(response.data.data.id, response.data.data.email,
                         response.data.data.login, true))
                 }
             })
     }
+
 };
 
 export const LoginTS = (email: string, password: string, rememberMe: boolean) => {

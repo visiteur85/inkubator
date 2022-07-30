@@ -1,29 +1,34 @@
 import React from "react";
 import "./App.css";
-import {Header} from "./componets/Header/Header";
 import {Navbar} from "./componets/Navbar/Navbar";
 
 
-import {Route} from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 
 
 
 import {UsersContainer} from "./componets/Users/UsersContainer";
 import {ProfileContainer} from "./componets/Profile/ProfileContainer";
 import {HeaderContainer} from "./componets/Header/HeaderContainer";
-import {Login, LoginContainer, LoginForm} from "./componets/Login/Login";
+import { LoginContainer, LoginForm} from "./componets/Login/Login";
 import {DialogsContainer} from "./componets/Dialogs/DialogsContainer";
 import {connect} from "react-redux";
-import {getMeThunkCreator} from "./Redux/auth-reducer";
 import {compose} from "redux";
+import {initializeAppTC} from "./Redux/app-reducer";
+import {RootReducerType} from "./Redux/redux-store";
+import {Preloader} from "./componets/common/preloader/Preloader";
 
-type PropsType =  MapDispatchToPropsType
+type PropsType =  MapStateToPropsType & MapDispatchToPropsType
 class App extends React.Component<PropsType> {
 
     componentDidMount() {
-        this.props.getMeThunkCreator()
+        this.props.initializeAppTC()
     }
     render() {
+
+        if (!this.props.initialized) {
+        return <Preloader/>}
+
         return (
             <div className="app-wrapper">
                 <HeaderContainer/>
@@ -48,7 +53,17 @@ class App extends React.Component<PropsType> {
 }
 
 type MapDispatchToPropsType = {
-    getMeThunkCreator:()=>void
+    initializeAppTC:()=>void
 }
 
-export default compose( connect(null, {getMeThunkCreator}))(App);
+type MapStateToPropsType = {
+    initialized: boolean
+
+};
+
+const mapStateToProps = (state: RootReducerType): MapStateToPropsType => ({
+    initialized: state.app.initialized
+
+})
+
+export default compose(  connect(mapStateToProps, {initializeAppTC}))(App);

@@ -1,7 +1,7 @@
 import {authApi, userApi} from "../API/api";
 import {Dispatch} from "redux";
 import {stopSubmit} from "redux-form";
-
+import {getMeThunkCreator} from "./auth-reducer";
 
 
 export type AuthInitialStateType = {
@@ -9,14 +9,14 @@ export type AuthInitialStateType = {
 }
 
 
-let initialState: AuthInitialStateType = {
+const initialState: AuthInitialStateType = {
     initialized: false,
 
 
 }
 
 
-export const appReducer = (state = initialState, action: setUserDataType) => {
+export const appReducer = (state = initialState, action: setAppIniType) => {
     switch (action.type) {
         case "app/INITIALIZED_success": {
             let newState = {
@@ -31,7 +31,7 @@ export const appReducer = (state = initialState, action: setUserDataType) => {
 };
 
 
-export type setUserDataType = ReturnType<typeof initializedSuccessAC>
+export type setAppIniType = ReturnType<typeof initializedSuccessAC>
 export const initializedSuccessAC = () => {
     return {
         type: "app/INITIALIZED_success",
@@ -40,39 +40,15 @@ export const initializedSuccessAC = () => {
 };
 
 
-export const initializeTC = () => {
-    return (dispatch: Dispatch<any>) => {
+export const initializeAppTC = () => {
+    return async (dispatch: Dispatch<any>) => {
+        let promise = dispatch(getMeThunkCreator());
 
-}};
-//
-// export const LoginTS = (email: string, password: string, rememberMe: boolean) => {
-//     return (dispatch: Dispatch<any>) => {
-//
-//
-//
-//         authApi.login(email, password, rememberMe)
-//             .then(response => {
-//                 if (response.data.resultCode === 0) {
-//                     dispatch(getMeThunkCreator())
-//                 } else {
-//                     let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
-//                     dispatch(stopSubmit("login", {_error: message}))
-//                 }
-//             })
-//     }
-// };
-//
-// export const Logout = () => {
-//     return (dispatch: Dispatch<any>) => {
-//         authApi.logout()
-//             .then(response => {
-//                 if (response.data.resultCode === 0) {
-//                     dispatch(setUserData(null, null,
-//                         null, false))
-//                 }
-//             })
-//     }
-// };
+        await Promise.all([promise])
+        dispatch(initializedSuccessAC());
+     }
+};
+
 
 
 
