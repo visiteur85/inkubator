@@ -2,8 +2,7 @@ import React from 'react';
 import s from "./users.module.css";
 import {OneUserType} from "../../Redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {userApi} from "../../API/api";
+
 
 type PropsType = {
     totalCount: number

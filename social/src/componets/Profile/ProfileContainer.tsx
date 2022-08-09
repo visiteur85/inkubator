@@ -1,7 +1,5 @@
 import React from "react";
 
-// import {} from "../../App";
-
 import {Profile} from "./Profile";
 
 import {connect} from "react-redux";
@@ -44,7 +42,11 @@ export class ProfileAPIContainer extends React.Component<CommonPropsType> {
         let userId = this.props.match.params.userId;
         if (!userId) {
 
-            userId = this.props.autorizedUserId
+            userId = this.props.autorizedUserId;
+            if (!userId) {
+                this.props.history.push('/login')
+            }
+
         }
         this.props.getProfileThunkCreator(userId);
 

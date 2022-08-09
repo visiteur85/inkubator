@@ -3,11 +3,11 @@ import {connect} from "react-redux";
 
 import {RootReducerType} from "../../Redux/redux-store";
 import {
-    follow, followThunkCreator, getUsersThunkCreator,
+     followThunkCreator, getUsersThunkCreator,
     OneUserType,
     setCurrentPage,
     toggleFollowingProgress,
-    unFollow, unFollowThunkCreator
+   unFollowThunkCreator
 } from "../../Redux/users-reducer";
 
 import React from "react";
@@ -43,14 +43,6 @@ export class UsersApiComponent extends React.Component<PropsType> {
     onChangedPage = (page: number) => {
         this.props.getUsersThunkCreator(page, this.props.pageSize)
 
-        // this.props.setCurrentPage(page)
-        // this.props.setIsFetching(true)
-        // userApi.getUsers(page, this.props.pageSize)
-        //     .then(data => {
-        //         this.props.setIsFetching(false)
-        //         this.props.setUsers(data.items);
-        //         // this.props.setTotalUsersCount(response.data.totalCount);
-        //     })
     }
 
     render() {
@@ -85,15 +77,7 @@ type MapStateToPropsType = {
 };
 
 
-// export type MapDispatchToPropsType = {
-//     follow: (userId: number) => void
-//     unFollow: (userId: number) => void
-//     setUsers: (items: Array<OneUserType>) => void
-//     setCurrentPage: (currentPage: number) => void
-//     setTotalUsersCount: (totalCount: number) => void
-//     setIsFetching:(isFetching: boolean)=>void
-//
-// };
+
 const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
     return {
         items: state.usersPage.items,
