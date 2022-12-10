@@ -33,7 +33,7 @@ export const userApi = {
     },
 
 };
-// asdf
+
 export const profileApi = {
     getProfile(userId: number) {
         return instance.get(`1.0/profile/${userId}`
